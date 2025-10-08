@@ -10,6 +10,17 @@
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
     
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 
@@ -818,7 +829,7 @@
     // =========================================================================
     // 4. بنك الأسئلة الشامل والمصحح (329 سؤال)
     // *تم تحديث جميع الأسئلة لتكون دقيقة ومصححة مع تنسيق LaTeX، وإضافة الأسئلة المرئية الجديدة.*
-    // *ملاحظة: تم مضاعفة الـ Backslashes (\\) في LaTeX لضمان القراءة الصحيحة داخل JavaScript.*
+    // *تم تعديل ترميز الـ LaTeX مجدداً ليتناسب مع GitHub Pages بشكل أفضل عبر استخدام \\cdot و \\overline{}*
     // =========================================================================
     
     // Total Unique Questions: ~329 
@@ -897,8 +908,7 @@
             answer: "$F = \\overline{X}Y + X\\overline{Y}$", // The diagram shows XOR, which is F = X \oplus Y = \overline{X}Y + X\overline{Y}
             points: 1 
         },
-        // --- (A total of 329 questions including the 5 image-dependent and a comprehensive set covering all topics) ---
-        
+
         // ======================================================
         // Chapter 1: Digital Systems and Information (110 Total Questions)
         // ======================================================
@@ -947,7 +957,7 @@
         // ======================================================
         // Chapter 2 Part 1: Boolean Algebra & Canonical Forms (85 Total Questions)
         // ======================================================
-        { type: "mcq", q: "What does the dot ($\cdot$) represent in the expression $Y=A\cdot B$ in Boolean Algebra?", options: ["OR", "NOT", "AND", "XOR"], answer: "AND", points: 1 },
+        { type: "mcq", q: "What does the dot ($F=A\\cdot B$) represent in Boolean Algebra?", options: ["OR", "NOT", "AND", "XOR"], answer: "AND", points: 1 },
         { type: "tf", q: "The **Truth Table** is a tabular list of the function's values for all possible combinations of its input values.", answer: true, points: 1 },
         { type: "mcq", q: "Which Boolean Law states that $X+1=1$?", options: ["Identity", "Idempotence", "Absorption", "Null/One Law"], answer: "Null/One Law", points: 1 },
         { type: "mcq", q: "The **Dual** of a Boolean expression is obtained by replacing AND with OR, 0 with 1, OR with AND, and 1 with 0.", options: ["True", "False"], answer: "True", points: 1 },
@@ -974,7 +984,7 @@
         // ======================================================
         // Chapter 2 Part 2: Circuit Optimization - K-Maps (up to p. 41) (99 Total Questions)
         // ======================================================
-        { type: "mcq", q: "What is the **Literal Cost** (L) for the function $F=BD+A\\overline{B}C+A\\overline{C}\\overline{D}$?", options: ["6", "7", "8", "9"], answer: "8", points: 1 },
+        { type: "mcq", q: "What is the **Literal Cost** (L) for the function $F=BD+A\\overline{B}C+A\\overline{C}+BD$ is:", options: ["5", "6", "7", "8"], answer: "6", points: 1 },
         { type: "mcq", q: "What is the **Gate Input Cost** (G) for the function $F=\\overline{A}+\\overline{B}\\overline{C}+\\overline{B}\\overline{\\overline{C}}$? (Inverters are not counted)", options: ["5", "6", "7", "9"], answer: "7", points: 1 },
         { type: "tf", q: "Temporarily increasing the **Gate Input Cost** (G) during a series of transformations can lead to a final solution with lower cost.", answer: true, points: 1 },
         { type: "mcq", q: "In a **Karnaugh Map (K-Map)**, each cell represents a:", options: ["Maxterm", "Literal", "Prime Implicant", "Minterm"], answer: "Minterm", points: 1 },
@@ -1023,7 +1033,7 @@
     let totalMaxScore = masterQuizBank.reduce((sum, q) => sum + q.points, 0); // المجموع الأقصى لدرجات بنك الأسئلة بالكامل
 
     // =========================================================================
-    // 12. إدارة الواجهة والتنقل
+    // 5. إدارة الواجهة والتنقل
     // =========================================================================
     
     document.addEventListener('DOMContentLoaded', () => {
@@ -1073,7 +1083,7 @@
     }
 
     // =========================================================================
-    // 13. وظائف تسجيل الدخول والخروج
+    // 6. وظائف تسجيل الدخول والخروج
     // =========================================================================
     
     function attemptLogin() {
@@ -1108,7 +1118,7 @@
     }
 
     // =========================================================================
-    // 14. وظائف تهيئة الاختبار وعرضه
+    // 7. وظائف تهيئة الاختبار وعرضه
     // =========================================================================
 
     function shuffleArray(array) {
@@ -1280,7 +1290,7 @@
     }
     
     // =========================================================================
-    // 15. وظائف معالجة الإجابات الفورية
+    // 8. وظائف معالجة الإجابات الفورية
     // =========================================================================
     
     function handleAnswerChange(qIndex, value) {
@@ -1403,7 +1413,7 @@
     }
 
     // =========================================================================
-    // 16. وظيفة تصحيح الاختبار وتقديم النتيجة النهائية
+    // 9. وظيفة تصحيح الاختبار وتقديم النتيجة النهائية
     // =========================================================================
     
     function checkSingleAnswer(qData, userAnswer) {
@@ -1497,7 +1507,7 @@
     }
     
     // =========================================================================
-    // 17. وظائف المراجعة (Review)
+    // 10. وظائف المراجعة (Review)
     // =========================================================================
 
     function getCorrectAnswerDisplay(qData) {
@@ -1523,7 +1533,7 @@
     }
 
     // =========================================================================
-    // 18. تأثير الألعاب النارية (Fireworks)
+    // 11. تأثير الألعاب النارية (Fireworks)
     // =========================================================================
     
     const canvas = document.getElementById('fireworks-canvas');
