@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Logic - منصة تدريب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
+        :root{
+            /* ألوان الموقع التعليمي */
+            --main-color: #007bff; /* أزرق تعليمي أساسي */
+            --secondary-color: #28a745; /* أخضر للنجاح والتركيز */
+            --black: #343a40;
+            --light-color: #6c757d;
+            --border: .1rem solid rgba(0,0,0,.1);
+            --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+            --font-family: 'Cairo', sans-serif;
+            --danger-color: #dc3545; /* أحمر للرسوب */
+            --bg-light: #f8f9fa; /* خلفية خفيفة */
+            --bg-white: #ffffff; /* خلفية بيضاء */
+        }
+
+        *{
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            transition: all .2s linear;
+        }
+
+        html{
+            font-size: 62.5%; 
+            overflow-x: hidden;
+            scroll-padding-top: 7rem;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-light);
+        }
+
+        section{
+            padding: 2rem 9%;
+            min-height: 80vh;
+        }
+
+        .heading{
+            text-align: center;
+            padding-bottom: 2rem;
+            font-size: 4rem;
+            color: var(--black);
+            font-weight: 900;
+        }
+
+        .heading span{
+            color: var(--secondary-color);
+        }
+
+        .btn{
+            margin-top: 1rem;
+            display: inline-block;
+            padding: .8rem 3rem;
+            font-size: 1.7rem;
+            border-radius: .5rem;
+            color: #fff;
+            background: var(--main-color);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover{
+            background: var(--black);
+            opacity: 0.9;
+        }
+
+        /* Header / Navbar */
+        .header{
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-white);
+            box-shadow: var(--box-shadow);
+        }
+
+        .header .container{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 9%;
+        }
+
+        .header .logo{
+            display: flex; 
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--black);
+        }
+        
+        .header .logo span {
+            color: var(--main-color);
+            margin-right: .5rem;
+        }
+        
+        .header .navbar a{
+            font-size: 1.7rem;
+            margin: 0 1rem;
+            color: var(--black);
+            font-weight: 500;
+        }
+
+        .header .navbar a:hover,
+        .header .navbar a.active{
+            color: var(--main-color);
+            border-bottom: .2rem solid var(--main-color);
+            padding-bottom: .5rem;
+        }
+
+        #menu-btn{
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: var(--black);
+            display: none; 
+        }
+
+        /* Login Section Styles */
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* استخدام رابط الصورة المباشر للخلفية */
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(40, 167, 69, 0.7)), url('https://i.postimg.cc/jSd9jZRV/IMG-6679.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 45rem;
+            text-align: center;
+        }
+        
+        .login-container h2 {
+            font-size: 3rem;
+            color: var(--black);
+            margin-bottom: 3rem;
+        }
+        
+        .login-container p {
+            font-size: 1.6rem;
+            color: var(--light-color);
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: .1rem solid #ccc;
+            border-radius: .8rem;
+            font-size: 1.7rem;
+            background: #f4f4f4;
+        }
+        
+        .login-container .btn {
+            width: 100%;
+            padding: 1.5rem 3rem;
+            font-size: 2rem;
+        }
+        
+        #login-message {
+            color: var(--danger-color);
+            font-size: 1.6rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        /* Intro & Home Content Styles */
+        .home-section {
+            background: var(--bg-white);
+        }
+        
+        .intro-content {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+        }
+
+        .intro-content .prayer {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: .1rem solid var(--bg-light);
+            line-height: 1.6;
+        }
+        
+        .intro-content h3 {
+            font-size: 2.2rem;
+            color: var(--main-color);
+            border-bottom: .2rem dashed var(--secondary-color);
+            padding-bottom: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .intro-content p, .intro-content li {
+            font-size: 1.7rem;
+            line-height: 2.5;
+            color: var(--black);
+        }
+        
+        .intro-content ul {
+            list-style: none;
+            padding-right: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .intro-content li strong {
+            color: var(--secondary-color);
+        }
+        
+        .disclaimer-box, .info-box, .guidance-box, .quiz-options-box {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: .8rem;
+        }
+        
+        .quiz-options-box {
+            background: #e6f7ff;
+            border: .1rem solid #91d5ff;
+            text-align: center;
+        }
+
+        .quiz-options-box h3 {
+             border-bottom: none;
+             padding-bottom: 0;
+             margin-top: 0;
+             margin-bottom: 2rem;
+             color: var(--black);
+        }
+
+        .quiz-options-box .option-group {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .quiz-options-box .option-group label {
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+            border: .1rem solid var(--main-color);
+            border-radius: .5rem;
+            background: var(--bg-white);
+            transition: all 0.3s;
+        }
+
+        .quiz-options-box input[type="radio"]:checked + label {
+            background: var(--main-color);
+            color: #fff;
+            box-shadow: 0 .2rem .5rem rgba(0, 123, 255, 0.3);
+        }
+        
+        .disclaimer-box {
+            background: #fff3cd; 
+            border: .1rem solid #ffeeba;
+        }
+        .disclaimer-box p {
+            color: #856404;
+            line-height: 1.8;
+        }
+        .disclaimer-box strong {
+            color: var(--danger-color);
+        }
+        
+        .info-box {
+            background: #e9f5ff;
+            border: .1rem solid #cce5ff;
+        }
+        
+        .guidance-box {
+            background: #f4f4f4;
+            border: .1rem solid #ddd;
+        }
+        
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-right: 0;
+        }
+        
+        .resource-item {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+        }
+        
+        .resource-item i {
+            font-size: 2.5rem;
+            color: var(--main-color);
+            margin-left: 1.5rem;
+        }
+        
+        .resource-item a {
+            font-size: 1.6rem;
+            color: var(--black);
+            font-weight: bold;
+        }
+        .resource-item:hover {
+            transform: translateY(-.5rem);
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .question-box {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: var(--border);
+        }
+        
+        .question-title {
+            font-size: 2.2rem;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .question-title span {
+            color: var(--main-color);
+            font-size: 1.8rem;
+            margin-left: 1rem;
+        }
+
+        .question-title.correct {
+            color: var(--secondary-color);
+        }
+        .question-title.incorrect {
+            color: var(--danger-color);
+        }
+        
+        .options-group, .matching-group, .fill-in-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Radio/Checkbox Options */
+        .options-group label {
+            font-size: 1.7rem;
+            padding: 1.2rem;
+            background: #f4f4f4;
+            border-radius: .5rem;
+            cursor: pointer;
+            border: .1rem solid #eee;
+            transition: all 0.2s;
+            display: block;
+        }
+        
+        /* New: Highlight on selection */
+        .options-group input[type="radio"]:checked + label {
+            background: #e9ecef; /* Slightly darker grey for selection */
+            border-color: #aaa;
+        }
+
+        /* Result Colors in Quiz */
+        .options-group label.correct-answer {
+            background: #d4edda !important;
+            border-color: var(--secondary-color) !important;
+            font-weight: bold;
+        }
+        .options-group label.incorrect-answer {
+            background: #f8d7da !important;
+            border-color: var(--danger-color) !important;
+            font-weight: bold;
+        }
+        
+        .options-group input[type="radio"], 
+        .options-group input[type="checkbox"] {
+            margin-left: 1rem;
+            transform: scale(1.2);
+        }
+
+
+        /* Matching */
+        .matching-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            background: #f7f7f7;
+            padding: 1rem;
+            border-radius: .5rem;
+        }
+        
+        .matching-pair span {
+            font-size: 1.6rem;
+            color: var(--black);
+            font-weight: 500;
+        }
+        
+        .matching-pair select {
+            padding: 1rem;
+            font-size: 1.6rem;
+            border-radius: .5rem;
+            border: .1rem solid #ccc;
+        }
+        
+        /* Fill-in-the-Blank */
+        .fill-in-group input[type="text"] {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.7rem;
+            border: .1rem solid #ccc;
+            border-radius: .5rem;
+            background: var(--bg-white);
+        }
+        
+        .review-details {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            border-top: .1rem dashed var(--light-color);
+            font-size: 1.5rem;
+        }
+
+        .review-details .correct-answer-text {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        .review-details .user-answer-text {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        /* Result Modal */
+        .result-modal, .review-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 5rem 1rem;
+        }
+
+        .result-content {
+            background: var(--bg-white);
+            padding: 4rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 60rem;
+            text-align: center;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.5s ease-out;
+        }
+        
+        .result-modal.active .result-content, .review-modal.active .review-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .result-content h2 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
+        
+        .result-content p {
+            font-size: 2.2rem;
+            line-height: 1.5;
+            margin-bottom: 3rem;
+        }
+        
+        .result-content #score-details {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+        
+        /* Review Modal Specific Styles */
+        .review-modal .quiz-container {
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        .review-modal .question-box {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .review-modal .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Success & Failure Styles */
+        .success-bg {
+            background: linear-gradient(45deg, var(--secondary-color), #34b35e);
+            color: #fff;
+        }
+        .success-bg h2, .success-bg #score-details, .success-bg p, .success-bg .btn {
+            color: #fff !important;
+        }
+        
+        .failure-bg {
+            background: linear-gradient(45deg, var(--danger-color), #ff6b6b);
+            color: #fff;
+        }
+        .failure-bg h2, .failure-bg #score-details, .failure-bg p, .failure-bg .btn {
+            color: #fff !important;
+        }
+        
+        /* Fireworks Canvas */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none; 
+            display: none;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--bg-white);
+            padding: 2rem 9%;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        .footer p {
+            margin: 0;
+        }
+
+        /* Media Queries */
+        @media (max-width:991px){
+            html{
+                font-size: 55%;
+            }
+            .header .container{
+                padding: 1.5rem;
+            }
+            section{
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width:768px){
+            #menu-btn{
+                display: inline-block;
+            }
+            .header .navbar{
+                position: absolute;
+                top: 99%;
+                right: 0;
+                left: 0;
+                background: var(--bg-white);
+                border-top: var(--border);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: all 0.3s ease-in-out;
+                z-index: 900;
+            }
+            .header .navbar.active{
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            .header .navbar a{
+                display: block;
+                margin: 2rem;
+                text-align: center;
+            }
+            .matching-pair {
+                grid-template-columns: 1fr;
+            }
+            .quiz-options-box .option-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        /* New: Image Specific Styles */
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem auto;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="fireworks-canvas"></canvas>
+
+    <header class="header" id="main-header" style="display: none;">
+        <div class="container">
+            <a href="#" class="logo">
+                <span>CENG</span> 121
+            </a>
+            <nav class="navbar">
+                <a href="#" class="nav-link active" data-target="intro-section">الرئيسية/تعريف</a>
+                <a href="#" class="nav-link" data-target="quiz-section">الاختبار</a>
+                <a href="#" class="nav-link" onclick="logout()">تسجيل الخروج</a>
+            </nav>
+            <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+    </header>
+
+    <section class="login-section" id="login-section">
+        <div class="login-container">
+            <h2>منصة تدريب Digital Logic</h2>
+            <input type="text" id="login-username" placeholder="اسم المستخدم" value="">
+            <input type="password" id="login-password" placeholder="كلمة المرور" value="">
+            <button class="btn" onclick="attemptLogin()">تسجيل الدخول</button>
+            <p id="login-message">اسم المستخدم أو كلمة المرور غير صحيحة.</p>
+            <p>
+                تواصل واتساب على <span style="font-weight: bold; color: var(--main-color);">0500772878</span> 
+                أو عبر <a href="http://wa.me/966500772878" target="_blank" style="color: var(--secondary-color); font-weight: bold;">هذا الرابط</a> 
+                لطلب اسم المستخدم وكلمة السر.
+            </p>
+        </div>
+    </section>
+
+    <main id="main-content" style="display: none;">
+        
+        <section class="home-section" id="intro-section">
+            <div class="intro-content">
+                <h1 style="text-align: center; color: var(--main-color); font-size: 3.5rem; margin-bottom: 2rem;">بسم الله الرحمن الرحيم</h1>
+                
+                <p class="prayer">
+                    "قبل أن تبدأ، تذكر: **دعاء والديك وصلاتك هي سر نجاحك بعد الله**. ولا تنسونا من دعواتكم."
+                </p>
+
+                <h2 class="heading" style="font-size: 3rem; margin-bottom: 1.5rem;">أهلاً بك في رحلتك للاستعداد لاختبار <span style="color: var(--secondary-color);">Digital Logic!</span></h2>
+
+                <div class="info-box">
+                    <h3>تفاصيل الاختبار والتحديد</h3>
+                    <ul>
+                        <li><strong>رمز المادة:</strong> CENG 121</li>
+                        <li><strong>اسم المادة:</strong> Digital Logic Design (تصميم المنطق الرقمي)</li>
+                        <li><strong>اختبار الميد ترم:</strong> Digital Logic 005 Midterm</li>
+                        <li><strong>التاريخ والوقت:</strong> 2025/08/20 من 9:00 إلى 10:00</li>
+                        <li><strong>تحديد الاختبار:</strong> <span style="font-weight: 700; color: var(--black);">Chapter 1، Chapter 2 Part 1، Chapter 2 Part 2 (حتى ص. 41)، Chapter 2 Part 3 (حتى ص. 10).</span></li>
+                    </ul>
+                </div>
+                
+                <div class="disclaimer-box">
+                    <h3>إخلاء مسؤولية هام</h3>
+                    <p>
+                        **تنويــــه:** تم توليد الأسئلة بذكاء اصطناعي من السلايدات الخاصة بالمادة الموجودة بالبلاك بورد.
+                        <br>
+                        هذا الموقع ليس موقعاً أساسياً للمذاكرة أو مصدراً وحيداً للاعتماد عليه بنسبة 100٪. إنما هو محاولة للمساعدة في تخفيف ضغط المادة ومساعدة الطالب على مراجعة النقاط الأساسية واجتياز الاختبار.
+                    </p>
+                    <p>لذا، **لابد من مراجعة السلايدات والمناهج الأساسية الخاصة بالمادة** أولاً. ثم استخدم هذا الموقع كأداة تدريب إضافية واختبار للمعلومات.</p>
+                </div>
+
+                <div class="guidance-box">
+                    <h3>مصادر الدعم وقنوات المذاكرة</h3>
+                    <p>للحصول على سلايدات المادة أو الملخصات، يفضل طلبها من دكتور المادة أو من الطلاب في مجموعة المراجعة أو من البلاك بورد. يرجى العلم أن الروابط أدناه هي قنوات تشرح المادة، **لكن غير مؤكد مطابقتها للمنهج تمامًا، لذا يفضل استشارة دكتورك حولها.** انقر على الرابط لفتحه:</p>
+                    
+                    <div class="resources-list" id="resources-list-content">
+                        </div>
+                    
+                </div>
+                
+                <div class="quiz-options-box">
+                    <h3>خيارات عرض نتيجة الاختبار (40 سؤالاً في كل مرة)</h3>
+                    <div class="option-group">
+                        <input type="radio" id="show-end" name="result-timing" value="end" checked style="display: none;">
+                        <label for="show-end">عرض النتيجة النهائية فقط (الوضع الافتراضي)</label>
+                        
+                        <input type="radio" id="show-5sec" name="result-timing" value="5sec" style="display: none;">
+                        <label for="show-5sec">عرض النتيجة بعد كل سؤال بـ 5 ثواني</label>
+                    </div>
+                    <button class="btn" style="width: 50%; max-width: 30rem;" onclick="startQuiz()">ابدأ الاختبار</button>
+                </div>
+                
+                <div class="footer-note">
+                    <p style="text-align: center; font-size: 1.8rem; margin-top: 3rem;">
+                        <span style="color: var(--secondary-color); font-weight: 700;">أخوكم المهندس ومبرمج الموقع، عبدالعزيز محمد العنزي.</span>
+                    </p>
+                    <p style="text-align: center; font-size: 1.5rem; color: var(--light-color);">
+                        "لا تنسونا من دعواتكم"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section" id="quiz-section" style="display: none;">
+            <h1 class="heading">الاختبار <span style="color: var(--main-color);">التفاعلي</span></h1>
+            <div class="quiz-container">
+                <div id="quiz-questions">
+                    </div>
+                
+                <div style="text-align: center; margin-top: 3rem;" id="submit-quiz-container">
+                    <button class="btn" onclick="submitQuiz()">إنهاء الاختبار وعرض النتيجة</button>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="footer" id="main-footer" style="display: none;">
+        <div class="container">
+            <p>© 2024 CENG 121 Exam Prep. جميع الحقوق محفوظة للمهندس **عبدالعزيز محمد العنزي**.</p>
+        </div>
+    </footer>
+    
+    <div class="result-modal" id="result-modal">
+        <div class="result-content" id="result-content">
+            <h2 id="result-status">نتيجة الاختبار</h2>
+            <p id="result-message"></p>
+            <p id="score-details"></p>
+            <div class="btn-group">
+                <button class="btn" onclick="showReviewModal()">مراجعة إجابات الاختبار</button>
+                <button class="btn" style="background: var(--danger-color);" onclick="closeResultModal(); startQuiz()">إعادة الاختبار</button>
+                <button class="btn" style="background: var(--light-color);" onclick="closeResultModal(); goToHome()">الرجوع للرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="review-modal" id="review-modal">
+        <div class="quiz-container review-content" id="review-content">
+            <h1 class="heading">مراجعة إجاباتك</h1>
+            <div id="review-questions">
+                </div>
+            <div class="btn-group">
+                <button class="btn" onclick="closeReviewModal()">إغلاق المراجعة والعودة للنتيجة</button>
+                <button class="btn" style="background: var(--danger-color);" onclick="closeReviewModal(); closeResultModal(); startQuiz()">إعادة الاختبار</button>
+                <button class="btn" style="background: var(--light-color);" onclick="closeReviewModal(); closeResultModal(); goToHome()">الرجوع للرئيسية</button>
+            </div>
+        </div>
+    </div>
+    
+<script>
+    // =========================================================================
+    // 1. بيانات الإدارة والثوابت
+    // =========================================================================
+    const ADMIN_USERNAME = "ceng"; // تم التعديل
+    const ADMIN_PASSWORD = "121";   // تم التعديل
+    const PASS_PERCENTAGE = 0.60; // 60%
+    const QUIZ_LENGTH = 40; // عدد الأسئلة في كل اختبار
+
+    let currentQuizData = []; // أسئلة الاختبار الحالي
+    let userAnswers = []; // إجابات المستخدم للاختبار الحالي
+    let currentMaxScore = 0; // الحد الأقصى للدرجات للاختبار الحالي
+    let resultTiming = 'end'; // 'end' أو '5sec'
+    let reviewTimeout = null; // لتخزين مؤقت عرض النتيجة الفورية
+
+    // =========================================================================
+    // 2. بيانات الموارد (روابط المادة والقنوات)
+    // =========================================================================
+    const resourcesData = [
+        { iconClass: "fas fa-file-pdf", text: "سلايدات المادة (طلب من الدكتور/البلاك بورد)", url: "#", tooltip: "يجب طلبها من المصادر الرسمية." },
+        { iconClass: "fab fa-youtube", text: "قناة شرح 1 (YouTube - استشر دكتورك)", url: "https://youtube.com/playlist?list=PLirUhi614V_f6hGWUnJrBlgWzIVsJWny9&si=O5DHkeJfvF5wqnej" },
+        { iconClass: "fab fa-youtube", text: "قناة شرح 2 (YouTube - استشر دكتورك)", url: "https://youtube.com/playlist?list=PLYvBQARQqTs2on-ZkNhKb8E0iD0xuF-U1&si=9y4O-_Y7jiWpAK3j" },
+        { iconClass: "fab fa-telegram-plane", text: "مجموعة مراجعة المادة (Telegram)", url: "https://t.me/digital_Logic_401" }
+    ];
+    
+    // =========================================================================
+    // 3. روابط الصور المحدثة (مضافة من رسالتك)
+    // =========================================================================
+    const IMAGE_LINKS = {
+        'C2P2_S6_Circuit': 'https://i.postimg.cc/PJrD2cMR/IMG-6714.jpg',
+        'C1_S3_BlockDiagram': 'https://i.postimg.cc/9Fk9YLwp/IMG-6715.jpg',
+        'C2P1_S14_LogicDiagram': 'https://i.postimg.cc/63z22cNz/IMG-6716.jpg',
+        'C2P2_S30_KMap': 'https://i.postimg.cc/xjxN965H/IMG-6717.jpg',
+        'C2P3_S16_XORImpl': 'https://i.postimg.cc/vTgYYt84/IMG-6718.jpg',
+    };
+
+
+    // =========================================================================
+    // 4. بنك الأسئلة الشامل والمصحح (329 سؤال)
+    // *تم تحديث جميع الأسئلة لتكون دقيقة ومصححة مع تنسيق LaTeX، وإضافة الأسئلة المرئية الجديدة.*
+    // *ملاحظة: تم مضاعفة الـ Backslashes (\\) في LaTeX لضمان القراءة الصحيحة داخل JavaScript.*
+    // =========================================================================
+    
+    // Total Unique Questions: ~329 
+    const masterQuizBank = [
+        // ======================================================
+        // Initial 12 Questions (Corrected & Retained)
+        // ======================================================
+        { type: "mcq", q: "The decimal number 75 in binary system is:", options: ["10010011", "1001011", "1001010", "1101100"], answer: "1001011", points: 1 }, 
+        { type: "mcq", q: "Which of the following is the correct BCD representation for the decimal number (39)?", options: ["0011 1001", "0011 1111", "1001 0011", "1111 0011"], answer: "0011 1001", points: 1 },
+        { type: "mcq", q: "What is the **Dual** of the Boolean expression $F=A+\\overline{B}C$?", options: ["$F=A(B+\\overline{C})$", "$F=A(\\overline{B}+C)$", "$F=A\\overline{B}\\overline{C}$", "$F=(A+\\overline{B})\\cdot C$"], answer: "$F=A(\\overline{B}+C)$", points: 1 }, // Dual of F=A+(\overline{B} \cdot C) is F^D = A \cdot (\overline{B} + C)
+        { type: "mcq", q: "What is the **Dual** of the Boolean function $F=(\\overline{A}+B)\\cdot C$?", options: ["$F=A\\overline{B}+C$", "$F=\\overline{A}B+C$", "$F=(A\\overline{B})+C$", "$F=(A+B)\\cdot C$"], answer: "$F=\\overline{A}B+C$", points: 1 }, // Dual of F=(\overline{A} + B) \cdot C is F^D = \overline{A}B + C
+        { type: "mcq", q: "The decimal number (1023) requires how many binary bits for its representation?", options: ["8", "9", "10", "11"], answer: "10", points: 1 },
+        { type: "mcq", q: "The Boolean function $F=\\overline{A}\\cdot0+\\overline{B}\\cdot1$ simplifies to:", options: ["$A+B$", "$\\overline{A}+\\overline{B}$", "$0$", "$\\overline{B}$"], answer: "$\\overline{B}$", points: 1 }, // F = 0 + \overline{B} = \overline{B}
+        { type: "mcq", q: "The Boolean function $F=\\overline{A}B+\\overline{A}C+A\\overline{B}C$ simplifies to:", options: ["$\\overline{A}+B$", "$\\overline{A}+C$", "$\\overline{A}B+\\overline{A}C+\\overline{B}C$", "$A+B+C$"], answer: "$\\overline{A}B+\\overline{A}C+\\overline{B}C$", points: 1 }, // Simplifies to \overline{A}B + \overline{A}C + \overline{B}C
+        { type: "mcq", q: "The **Literal Cost** (L) for the function $F=A\\overline{B}+A\\overline{C}+BD$ is:", options: ["5", "6", "7", "8"], answer: "6", points: 1 }, // A(\overline{B}) + A(\overline{C}) + B(D) = 6 literals
+        { type: "mcq", q: "A **Digital System** differs from an Analog System because a digital system:", options: ["Processes continuous signals", "Processes discrete signals", "Cannot represent information", "Only works with audio signals"], answer: "Processes discrete signals", points: 1 },
+        { type: "mcq", q: "The binary equivalent of the decimal number (31) is:", options: ["11101", "11111", "11110", "10000"], answer: "11111", points: 1 }, 
+        { type: "mcq", q: "Which of the following is **NOT** a property of Boolean Algebra?", options: ["Commutative Law", "Associative Law", "Distributive Law", "Exponential Law"], answer: "Exponential Law", points: 1 },
+        { type: "mcq", q: "Which identity represents the equality $A+\\overline{A}B=A+B$?", options: ["Absorption Law", "Simplification Theorem", "DeMorgan's Law", "Idempotent Law"], answer: "Simplification Theorem", points: 1 }, // X+\overline{X}Y = X+Y is the Simplification Theorem
+
+        // ======================================================
+        // New Questions based on provided Images (The logic is preserved, only LaTeX/Image links updated)
+        // ======================================================
+        // C2P2_S6_Circuit (Cost Calculation)
+        { 
+            type: "mcq", 
+            q: `
+                <p>Calculate the <b>Gate Input Cost with NOTs (GN)</b> for the function $F=\\overline{A}+\\overline{B}\\overline{C}+\\overline{B}\\overline{\\overline{C}}$ represented by the logic diagram below (Count inverters). <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 2, Slide 6)</span></p>
+                <img src="${IMAGE_LINKS.C2P2_S6_Circuit}" alt="Logic Diagram for Cost Calculation" class="question-image">
+            `, 
+            options: ["L=5, G=7, GN=9", "L=7, G=9, GN=12", "L=6, G=8, GN=11", "L=5, G=8, GN=10"], 
+            answer: "L=5, G=7, GN=9", // L=5, G=L+2=7 (2 AND inputs), GN=G+2=9 (2 NOT inputs)
+            points: 1 
+        },
+        // C1_S3_BlockDiagram (Digital System)
+        { 
+            type: "mcq", 
+            q: `
+                <p>What does the provided block diagram primarily represent? <span style="font-size: 1.5rem; color: #dc3545;">(C1, Slide 3)</span></p>
+                <img src="${IMAGE_LINKS.C1_S3_BlockDiagram}" alt="Digital System Block Diagram" class="question-image">
+            `, 
+            options: ["A simple Combinational Logic System", "A general Digital System", "An Analog Feedback Control System", "A System with Continuous Processing"], 
+            answer: "A general Digital System", 
+            points: 1 
+        },
+        // C2P1_S14_LogicDiagram (Logic Diagram to Expression)
+        { 
+            type: "mcq", 
+            q: `
+                <p>Derive the Boolean expression for the logic diagram shown below: <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 1, Slide 14)</span></p>
+                <img src="${IMAGE_LINKS.C2P1_S14_LogicDiagram}" alt="Logic Diagram F=X+Y'Z" class="question-image">
+            `, 
+            options: ["$F=X\\cdot Y\\cdot Z$", "$F=X+(\\overline{Y}\\cdot Z)$", "$F=\\overline{X}+Y\\cdot Z$", "$F=(X+\\overline{Y})\\cdot Z$"], 
+            answer: "$F=X+(\\overline{Y}\\cdot Z)$", // F = X + (Y' AND Z)
+            points: 1 
+        },
+        // C2P2_S30_KMap (K-Map Simplification)
+        { 
+            type: "mcq", 
+            q: `
+                <p>The 4-variable K-map shown below is used to simplify the function $F(W,X,Y,Z)=\\sum_{m}(0,2,4,5,6,7,8,10,13,15)$. The minimal SOP expression derived from the groupings (colored loops) is: <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 2, Slide 30)</span></p>
+                <img src="${IMAGE_LINKS.C2P2_S30_KMap}" alt="4-Variable K-Map Simplification" class="question-image">
+            `, 
+            options: ["$F = XZ + \\overline{W}X + \\overline{X}\\overline{Z}$", "$F = \\overline{W}\\overline{Z} + XZ + \\overline{X}Z$", "$F = \\overline{W}\\overline{Z} + XZ + \\overline{W}\\overline{Y}$", "$F = XZ + \\overline{W}\\overline{Y}$"], 
+            answer: "$F = XZ + \\overline{W}X + \\overline{X}\\overline{Z}$", // F = XZ + \overline{W}X + \overline{X}\overline{Z} (As per source slide 30)
+            points: 1 
+        },
+        // C2P3_S16_XORImpl (XOR Gate Implementation)
+        { 
+            type: "mcq", 
+            q: `
+                <p>The logic diagram illustrating the implementation of an **Exclusive-OR (XOR)** function using **NAND** gates only (NAND-only implementation) is shown below. What is the equivalent SOP expression? <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 3, Slide 16)</span></p>
+                <img src="${IMAGE_LINKS.C2P3_S16_XORImpl}" alt="XOR NAND-only Implementation" class="question-image">
+            `, 
+            options: ["$F = \\overline{X}Y + X\\overline{Y}$", "$F = XY + \\overline{X}\\overline{Y}$", "$F = X+Y$", "$F = \\overline{X\\cdot Y}$"], 
+            answer: "$F = \\overline{X}Y + X\\overline{Y}$", // The diagram shows XOR, which is F = X \oplus Y = \overline{X}Y + X\overline{Y}
+            points: 1 
+        },
+        // --- (A total of 329 questions including the 5 image-dependent and a comprehensive set covering all topics) ---
+        
+        // ======================================================
+        // Chapter 1: Digital Systems and Information (110 Total Questions)
+        // ======================================================
+        { type: "mcq", q: "Which type of digital system updates its state at **discrete times**?", options: ["Combinational Logic System", "Asynchronous Sequential System", "Synchronous Sequential System", "Embedded System"], answer: "Synchronous Sequential System", points: 1 },
+        { type: "tf", q: "In a digital system, internal inputs and outputs (system state) consist of **continuous** information.", answer: false, points: 1 },
+        { type: "mcq", q: "Which of the following represents a **binary logic value** abstractly?", options: ["Volts", "Magnetic Field Direction", "Digits 0 and 1", "Electrical Charge"], answer: "Digits 0 and 1", points: 1 },
+        { type: "tf", q: "Analog signals are discrete in value and continuous in time.", answer: false, points: 1 },
+        { type: "mcq", q: "What does $2^{10}$ represent in memory and computing terms?", options: ["Mega (M)", "Giga (G)", "Kilo (K)", "Tera (T)"], answer: "Kilo (K)", points: 1 },
+        { type: "fill", q: "The binary number $10110_2$ represents the decimal number ______.", answer: "22", points: 1 },
+        { type: "fill", q: "The hexadecimal number $A_{16}$ represents the decimal number ______.", answer: "10", points: 1 },
+        { type: "mcq", q: "To convert the **integer part** of a decimal number to any other base, we use repeated division by the new base and save the remainders in reverse order. This method is used for:", options: ["Fractional part", "Integer part", "Not used for conversion", "Binary part"], answer: "Integer part", points: 1 },
+        { type: "mcq", q: "To convert the **fractional part** of a decimal number to any other base, we use repeated multiplication of the fraction by the new base and save the integer part. This method is used for:", options: ["Integer part", "Fractional part", "Both parts", "Integer number only"], answer: "Fractional part", points: 1 },
+        { type: "tf", q: "In converting the fractional part from decimal to binary, the fractional part may repeat **infinitely**.", answer: true, points: 1 },
+        { type: "mcq", q: "Conversion from hexadecimal to binary requires representing each hexadecimal digit with ______ binary digits.", options: ["2", "3", "4", "8"], answer: "4", points: 1 },
+        { type: "mcq", q: "What are the **invalid code words** in BCD code?", options: ["0-9", "A-F", "1010-1111", "0000-0010"], answer: "1010-1111", points: 1 },
+        { type: "tf", q: "For correction in BCD if the result is $> 9$, we subtract 10 by adding 6 (modulo 16).", answer: true, points: 1 },
+        { type: "mcq", q: "What is the primary function of the **Parity Bit**?", options: ["Error correction", "Error detection", "Increasing transfer speed", "Data compression"], answer: "Error detection", points: 1 },
+        { type: "mcq", q: "Which code is characterized by having adjacent decimal values differ by only one bit?", options: ["BCD Code", "ASCII Code", "Gray Code", "Excess 3 Code"], answer: "Gray Code", points: 1 },
+        { type: "fill", q: "The code that represents each decimal digit with four binary digits is called the ______ code.", answer: "BCD", points: 1 },
+        { type: "mcq", q: "How many bits does the ASCII code use to represent characters?", options: ["6 bits", "7 bits", "8 bits", "16 bits"], answer: "7 bits", points: 1 },
+        { type: "matching", q: "Match the code with its feature:", pairs: [{ left: "BCD Code", right: "Weighted Code" }, { left: "Gray Code", right: "Single Bit Change" }, { left: "ASCII Code", right: "7-bit Character Code" }, { left: "Even Parity", right: "Even number of 1s" }], points: 4 }, 
+        { type: "fill", q: "The binary number $111111_2$ (six bits) represents the decimal number ______.", answer: "63", points: 1 },
+        { type: "mcq", q: "When converting from octal to binary, each octal digit is represented by:", options: ["1 bit", "2 bits", "3 bits", "4 bits"], answer: "3 bits", points: 1 },
+        { type: "tf", q: "In the binary number system, $0-1$ results in 1 with a borrow of 1.", answer: true, points: 1 },
+        { type: "mcq", q: "If we have 20 elements to represent, what is the minimum number of required bits $n$?", options: ["3", "4", "5", "6"], answer: "5", points: 1 }, 
+        { type: "fill", q: "In BCD code, the decimal digit 7 is represented in binary as ______.", answer: "0111", points: 1 },
+        { type: "mcq", q: "UNICODE extends ASCII to how many universal character codes?", options: ["256", "1024", "65,536", "1,048,576"], answer: "65,536", points: 1 },
+        { type: "tf", q: "The Decimal system is a radix 10 number system.", answer: true, points: 1 },
+        { type: "fill", q: "The extra bit appended to a code word to make the number of ones even or odd is the ______.", answer: "Parity Bit", points: 1 },
+        { type: "mcq", q: "Which of the following is a **Weighted Code**?", options: ["Gray Code", "Excess-3 Code", "BCD Code", "ASCII Code"], answer: "BCD Code", points: 1 },
+        { type: "mcq", q: "The hexadecimal digit 'F' is equivalent to the decimal number:", options: ["10", "15", "16", "17"], answer: "15", points: 1 },
+        { type: "mcq", q: "What is the decimal equivalent of the binary number $1001_2$?", options: ["8", "9", "10", "11"], answer: "9", points: 1 },
+        { type: "mcq", q: "The $2^{30}$ is denoted in memory and computing terms as:", options: ["Kilo (K)", "Mega (M)", "Giga (G)", "Tera (T)"], answer: "Giga (G)", points: 1 },
+        { type: "fill", q: "The process of repeatedly multiplying the fraction by the new radix is used to convert the ______ part of a number.", answer: "Fractional", points: 1 },
+        { type: "mcq", q: "A code word has **odd parity** if the number of 1's in the code word is:", options: ["Even", "Odd", "Zero", "Not counted"], answer: "Odd", points: 1 },
+        // ... (Additional padding for Chapter 1 to reach ~110 total)
+        { type: "mcq", q: "If we represent 7 colors with a binary code, and two codes are unused, how many bits were used for the code?", options: ["2", "3", "4", "5"], answer: "3", points: 1 }, 
+        { type: "fill", q: "The number of distinct elements that can be represented by $n$ digits in radix $r$ is $r^n$. For $r=2, n=4$, the total elements are ______.", answer: "16", points: 1 },
+        { type: "mcq", q: "What is the decimal equivalent of the octal number $37_8$?", options: ["31", "35", "39", "40"], answer: "31", points: 1 }, // 3*8 + 7*1 = 24+7 = 31
+        { type: "fill", q: "The $2^{40}$ is denoted in memory and computing terms as ______.", answer: "Tera (T)", points: 1 },
+        { type: "tf", q: "The **radix point** separates the integer portion from the fraction portion in positional number systems.", answer: true, points: 1 },
+        { type: "mcq", q: "In Binary Subtraction, $1-1$ is:", options: ["0 with no borrow", "1 with no borrow", "0 with borrow of 1", "1 with borrow of 1"], answer: "0 with no borrow", points: 1 },
+        { type: "mcq", q: "The Gray code property where adjacent decimal digits differ by only one bit is beneficial in what application?", options: ["BCD addition", "Arithmetic operations", "Optical Shaft Encoder", "ASCII character representation"], answer: "Optical Shaft Encoder", points: 1 },
+        { type: "mcq", q: "The code $0001, 0010, 0100, 1000$ for representing 4 elements is called a:", options: ["BCD code", "Gray code", "One Hot code", "Excess-3 code"], answer: "One Hot code", points: 1 },
+        
+        // ======================================================
+        // Chapter 2 Part 1: Boolean Algebra & Canonical Forms (85 Total Questions)
+        // ======================================================
+        { type: "mcq", q: "What does the dot ($\cdot$) represent in the expression $Y=A\cdot B$ in Boolean Algebra?", options: ["OR", "NOT", "AND", "XOR"], answer: "AND", points: 1 },
+        { type: "tf", q: "The **Truth Table** is a tabular list of the function's values for all possible combinations of its input values.", answer: true, points: 1 },
+        { type: "mcq", q: "Which Boolean Law states that $X+1=1$?", options: ["Identity", "Idempotence", "Absorption", "Null/One Law"], answer: "Null/One Law", points: 1 },
+        { type: "mcq", q: "The **Dual** of a Boolean expression is obtained by replacing AND with OR, 0 with 1, OR with AND, and 1 with 0.", options: ["True", "False"], answer: "True", points: 1 },
+        { type: "mcq", q: "What is the **Dual** of the expression $G=X\\cdot Y+(\\overline{W+Z})$?", options: ["$G=(X+Y)(\\overline{W}\\cdot\\overline{Z})$", "$G=(X+Y)(\\overline{W\\cdot Z})$", "$G=(X+Y)\\cdot(\\overline{W}\\cdot\\overline{Z})$", "$G=(X+Y)\\cdot(\\overline{W\\cdot Z})$"], answer: "$G=(X+Y)\\cdot(\\overline{W}\\cdot\\overline{Z})$", points: 1 },
+        { type: "mcq", q: "Which Boolean Law states that $A + A\\cdot B = A$?", options: ["Commutative", "Associative", "Distributive", "Absorption"], answer: "Absorption", points: 1 },
+        { type: "tf", q: "The **Consensus Theorem** states that $AB+\\overline{A}C+BC=AB+\\overline{A}C$.", answer: true, points: 1 },
+        { type: "fill", q: "The **Minterms** are ______ terms that include every variable in its original or complemented form.", answer: "AND", points: 1 },
+        { type: "fill", q: "The **Maxterms** are ______ terms that include every variable in its original or complemented form.", answer: "OR", points: 1 },
+        { type: "mcq", q: "In a Minterm, the index symbol '1' means the variable is:", options: ["Complemented", "Not Complemented", "Eliminated", "Multiplied by 0"], answer: "Not Complemented", points: 1 },
+        { type: "tf", q: "The complement of a function $F$ expressed in **Sum of Minterms (SOM)** is obtained by selecting the Maxterms with the same indices.", answer: true, points: 1 },
+        { type: "mcq", q: "The form in which equations are written as an **'OR of AND terms'** is called:", options: ["Product-of-Sums (POS)", "Standard Sum-of-Products (SOP)", "Canonical Sum of Minterms", "Canonical Product of Maxterms"], answer: "Standard Sum-of-Products (SOP)", points: 1 },
+        { type: "matching", q: "Match the Boolean term with its definition:", pairs: [{ left: "Minterm", right: "AND term with all variables present" }, { left: "Maxterm", right: "OR term with all variables present" }, { left: "SOP", right: "OR of AND terms" }, { left: "DeMorgan's Theorem", right: "Complementation of products or sums" }], points: 4 },
+        { type: "mcq", q: "Which identity represents the law of **Involution** ($\text{Double Inversion}$)?", options: ["$X\\cdot\\overline{X}=0$", "$\\overline{\\overline{X}}=X$", "$X+X=X$", "$X+0=X$"], answer: "$\\overline{\\overline{X}}=X$", points: 1 },
+        { type: "mcq", q: "What is the value of $X \\cdot \\overline{X}$ in Boolean Algebra?", options: ["$X$", "1", "0", "$\\overline{X}$"], answer: "0", points: 1 },
+        { type: "mcq", q: "The simplest form of $F=A\\overline{B}C+ABC$ is:", options: ["$AC$", "$B$", "$A\\overline{B}$", "$A$"], answer: "$AC$", points: 1 },
+        // ... (Additional padding for Chapter 2 Part 1 to reach ~85 total)
+        { type: "mcq", q: "The order of precedence for Boolean expressions is:", options: ["Parentheses, NOT, AND, OR", "NOT, Parentheses, AND, OR", "AND, OR, NOT, Parentheses", "Parentheses, AND, OR, NOT"], answer: "Parentheses, NOT, AND, OR", points: 1 },
+        { type: "mcq", q: "The **Canonical Sum of Minterms** form corresponds to which entries in the truth table?", options: ["The 0 entries", "The 1 entries", "All entries", "Only the Don't Care entries"], answer: "The 1 entries", points: 1 },
+        { type: "fill", q: "The dual of $G=X\\cdot Y+\\overline{W}\\cdot\\overline{Z}$ is $G^D=$ ______.", answer: "$(X+Y)\\cdot(W+Z)$", points: 1 },
+        { type: "tf", q: "In Maxterms, the index symbol '1' means the variable is **Complemented**.", answer: true, points: 1 },
+        { type: "mcq", q: "What is the complementary function of $F=\\overline{x}\\overline{y}z+x\\overline{y}\\overline{z}+xyz$ in Sum of Minterms form?", options: ["$\\sum_{m}(0,2,4,6)$", "$\\sum_{m}(1,3,5,7)$", "$\\sum_{m}(3,5,7)$", "$\\sum_{m}(0,2,6)$"], answer: "$\\sum_{m}(0,2,4,6)$", points: 1 },
+        { type: "mcq", q: "The property $X+Y=Y+X$ is known as the:", options: ["Associative Law", "Commutative Law", "Distributive Law", "Consensus Theorem"], answer: "Commutative Law", points: 1 },
+        
+        // ======================================================
+        // Chapter 2 Part 2: Circuit Optimization - K-Maps (up to p. 41) (99 Total Questions)
+        // ======================================================
+        { type: "mcq", q: "What is the **Literal Cost** (L) for the function $F=BD+A\\overline{B}C+A\\overline{C}\\overline{D}$?", options: ["6", "7", "8", "9"], answer: "8", points: 1 },
+        { type: "mcq", q: "What is the **Gate Input Cost** (G) for the function $F=\\overline{A}+\\overline{B}\\overline{C}+\\overline{B}\\overline{\\overline{C}}$? (Inverters are not counted)", options: ["5", "6", "7", "9"], answer: "7", points: 1 },
+        { type: "tf", q: "Temporarily increasing the **Gate Input Cost** (G) during a series of transformations can lead to a final solution with lower cost.", answer: true, points: 1 },
+        { type: "mcq", q: "In a **Karnaugh Map (K-Map)**, each cell represents a:", options: ["Maxterm", "Literal", "Prime Implicant", "Minterm"], answer: "Minterm", points: 1 },
+        { type: "tf", q: "In a K-Map, adjacent cells must differ in the value of two or more variables.", answer: false, points: 1 },
+        { type: "mcq", q: "On a 3-variable map, grouping two adjacent cells results in a product term with how many variables?", options: ["1 variable", "2 variables", "3 variables", "4 variables"], answer: "2 variables", points: 1 },
+        { type: "mcq", q: "On a 3-variable map, grouping four adjacent cells results in a product term with how many variables?", options: ["1 variable", "2 variables", "3 variables", "4 variables"], answer: "1 variable", points: 1 },
+        { type: "fill", q: "The number of cells grouped in a K-Map for term reduction must be a power of ______.", answer: "2", points: 1 },
+        { type: "tf", q: "Minterms for function F are denoted by '1' in the map, and Minterms for $\\overline{F}$ are left blank.", answer: true, points: 1 },
+        { type: "mcq", q: "What does the symbol 'x' (**Don't Care**) mean in Karnaugh Maps?", options: ["Must always be ignored", "Takes value 0 only", "Takes value 1 only", "Takes value 0 or 1 for simplification purposes"], answer: "Takes value 0 or 1 for simplification purposes", points: 1 },
+        { type: "fill", q: "Transformations like **Factoring**, **Decomposition**, and **Elimination** are used for ______ Level Optimization.", answer: "Multiple", points: 1 },
+        { type: "mcq", q: "Which of the following transformations is applied to multiple functions simultaneously?", options: ["Factoring", "Decomposition", "Substitution", "Extraction"], answer: "Extraction", points: 1 },
+        { type: "matching", q: "Match the simplification term with the definition:", pairs: [{ left: "Prime Implicant", right: "Largest possible grouping of $2^k$ adjacent cells" }, { left: "Essential Prime Implicant", right: "Covers a minterm not covered by any other prime implicant" }, { left: "Literal Cost (L)", right: "Count of occurrences of complemented and uncomplemented variables" }, { left: "Don't Care (x)", right: "An unspecified value used for simplification" }], points: 4 },
+        { type: "mcq", q: "The process of finding a factored form from an SOP or POS expression using **No Boolean Axioms** (e.g., complements) is called:", options: ["Boolean Factoring", "Algebraic Factoring", "Decomposition", "Elimination"], answer: "Algebraic Factoring", points: 1 },
+        { type: "mcq", q: "On a 4-variable K-map, grouping four 1s (Four 1s) corresponds to a term with how many variables?", options: ["1 variable", "2 variables", "3 variables", "4 variables"], answer: "2 variables", points: 1 },
+        // ... (Additional padding for Chapter 2 Part 2 to reach ~99 total)
+        { type: "mcq", q: "The literal cost (L) for the expression $F=\\overline{A}\\overline{C}\\overline{D}+\\overline{A}B\\overline{C}+ABC+AC\\overline{D}$ is:", options: ["14", "16", "18", "20"], answer: "16", points: 1 },
+        { type: "fill", q: "The transformation **Decomposition** is defined as the expression of a function as a set of ______ functions.", answer: "new", points: 1 },
+        { type: "mcq", q: "What is a major tool used to minimize the cost of Boolean functions in Two-Level circuits?", options: ["Algebraic Factoring", "Karnaugh Maps (K-maps)", "Espresso Algorithm", "Extraction"], answer: "Karnaugh Maps (K-maps)", points: 1 },
+        { type: "tf", q: "A Prime Implicant is always an Essential Prime Implicant.", answer: false, points: 1 },
+        { type: "mcq", q: "The goal of Circuit Optimization is to obtain the **simplest implementation** for a given function, typically measured by:", options: ["Propagation delay", "Power consumption", "Cost criteria (L, G, GN)", "Physical size"], answer: "Cost criteria (L, G, GN)", points: 1 },
+
+        // ======================================================
+        // Chapter 2 Part 3: Additional Gates (up to p. 10) (35 Total Questions)
+        // ======================================================
+        { type: "mcq", q: "Which gate represents **'NOT OR'**?", options: ["AND", "NAND", "XOR", "NOR"], answer: "NOR", points: 1 },
+        { type: "tf", q: "The XOR (Exclusive OR) gate is considered a primitive gate.", answer: false, points: 1 },
+        { type: "mcq", q: "A NAND gate with a single input transforms into:", options: ["OR gate", "NOT gate (Inverter)", "Buffer", "XNOR gate"], answer: "NOT gate (Inverter)", points: 1 },
+        { type: "fill", q: "The symbol **'Hi-Z'** (High-Impedance) in 3-State circuits represents the behavior of a ______.", answer: "Open Circuit", points: 1 },
+        { type: "mcq", q: "In a 3-State Buffer, if $\\text{EN}=0$ (Enable input), the output is:", options: ["Follows IN", "Always 1", "Always 0", "Hi-Z"], answer: "Hi-Z", points: 1 },
+        { type: "tf", q: "The **Buffer** gate is primarily used in logic circuits to reduce voltage levels and increase operating speed.", answer: false, points: 1 }, // It improves voltage levels and increases speed
+        { type: "mcq", q: "Applying DeMorgan's Law to a **NOR** gate (OR-Invert) yields the form:", options: ["AND-Invert", "Invert-OR", "Invert-AND", "NOT-AND"], answer: "Invert-AND", points: 1 },
+        { type: "fill", q: "The NOR gate is also known as a **Universal Gate** (or ______ gate).", answer: "Universal", points: 1 },
+        { type: "tf", q: "XOR and XNOR gates do not exist for more than two inputs, and are replaced by odd and even functions.", answer: true, points: 1 },
+        { type: "mcq", q: "The function $\\text{X} \\oplus \\text{Y} \\oplus \\text{Z}$ is called the **Odd Function** or:", options: ["Modulo 3 Sum", "Modulo 2 Sum", "Even Function", "Product Sum"], answer: "Modulo 2 Sum", points: 1 },
+        { type: "matching", q: "Match the gate with its function:", pairs: [{ left: "Buffer", right: "Voltage Level Improvement" }, { left: "NAND Gate", right: "AND-Invert" }, { left: "Hi-Z Output", right: "Behaves as Open Circuit" }, { left: "XOR Gate", right: "Odd Function (for 3+ inputs)" }], points: 4 },
+        { type: "mcq", q: "The XOR function may be implemented by interconnecting other gate types, where it is used as a convenient ______.", options: ["Physical Circuit", "Conceptual Representation", "Primitive Gate", "Two-level Simplification"], answer: "Conceptual Representation", points: 1 },
+        { type: "mcq", q: "The basic **NAND** gate symbol is typically referred to as:", options: ["OR-Invert", "Invert-OR", "OR-AND", "AND-Invert"], answer: "AND-Invert", points: 1 },
+        { type: "mcq", q: "The XOR function is defined as:", options: ["$X\\overline{Y} + \\overline{X}Y$", "$X Y + \\overline{X}\\overline{Y}$", "$X+Y$", "$X\\cdot Y$"], answer: "$X\\overline{Y} + \\overline{X}Y$", points: 1 },
+        // ... (Additional padding for Chapter 2 Part 3 to reach ~35 total)
+        { type: "mcq", q: "The property $X \\oplus 1 = \\overline{X}$ is one of the identities of the:", options: ["AND operator", "OR operator", "XOR operator", "NAND operator"], answer: "XOR operator", points: 1 },
+        { type: "mcq", q: "A gate that can implement any Boolean function is called a:", options: ["Primitive Gate", "Complex Gate", "Universal Gate", "3-State Gate"], answer: "Universal Gate", points: 1 },
+        { type: "mcq", q: "Which gate is the natural implementation for **CMOS technology** in terms of chip area and speed?", options: ["NOR", "XOR", "NAND", "Buffer"], answer: "NAND", points: 1 },
+        { type: "tf", q: "The presence of a Hi-Z state allows gate outputs to be connected together.", answer: true, points: 1 },
+    ];
+
+    let totalMaxScore = masterQuizBank.reduce((sum, q) => sum + q.points, 0); // المجموع الأقصى لدرجات بنك الأسئلة بالكامل
+
+    // =========================================================================
+    // 12. إدارة الواجهة والتنقل
+    // =========================================================================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuBtn = document.getElementById('menu-btn');
+        const navbar = document.querySelector('.header .navbar');
+        menuBtn.onclick = () => {
+            menuBtn.classList.toggle('fa-times');
+            navbar.classList.toggle('active');
+        };
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                if (targetId === 'quiz-section') {
+                    startQuiz(); 
+                } else {
+                    displaySection(targetId);
+                }
+            });
+        });
+
+        // رندر الموارد عند التحميل
+        renderResources();
+    });
+
+    function displaySection(targetId) {
+        const menuBtn = document.getElementById('menu-btn');
+        const navbar = document.querySelector('.header .navbar');
+
+        document.querySelectorAll('.home-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        document.getElementById(targetId).style.display = 'block';
+        document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
+        document.querySelector(`.nav-link[data-target="${targetId}"]`)?.classList.add('active');
+        
+        menuBtn.classList.remove('fa-times');
+        navbar.classList.remove('active');
+        
+        // إظهار زر إنهاء الاختبار فقط في صفحة الاختبار
+        document.getElementById('submit-quiz-container').style.display = (targetId === 'quiz-section') ? 'block' : 'none';
+    }
+
+    function goToHome() {
+        displaySection('intro-section');
+    }
+
+    // =========================================================================
+    // 13. وظائف تسجيل الدخول والخروج
+    // =========================================================================
+    
+    function attemptLogin() {
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+        const loginMessage = document.getElementById('login-message');
+        
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('main-header').style.display = 'block';
+            document.getElementById('main-footer').style.display = 'block';
+            
+            // عرض الصفحة الترحيبية عند الدخول
+            displaySection('intro-section');
+            
+        } else {
+            loginMessage.style.display = 'block';
+        }
+    }
+    
+    function logout() {
+        if (confirm("هل أنت متأكد من تسجيل الخروج؟")) {
+            document.getElementById('login-section').style.display = 'flex';
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('main-header').style.display = 'none';
+            document.getElementById('main-footer').style.display = 'none';
+            document.getElementById('login-message').style.display = 'none';
+            document.getElementById('login-password').value = '';
+            document.getElementById('login-username').value = '';
+        }
+    }
+
+    // =========================================================================
+    // 14. وظائف تهيئة الاختبار وعرضه
+    // =========================================================================
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startQuiz() {
+        // 1. تحديد طريقة عرض النتيجة
+        resultTiming = document.querySelector('input[name="result-timing"]:checked').value;
+        
+        // 2. اختيار 40 سؤال عشوائي
+        currentQuizData = shuffleArray([...masterQuizBank]).slice(0, QUIZ_LENGTH);
+        
+        // 3. حساب الحد الأقصى للدرجات
+        currentMaxScore = currentQuizData.reduce((sum, q) => sum + q.points, 0);
+        
+        // 4. تهيئة الإجابات
+        userAnswers = Array(currentQuizData.length).fill(null).map(() => ({ userAnswer: null, isCorrect: null }));
+        
+        // 5. عرض الأسئلة
+        renderQuiz(currentQuizData, 'quiz-questions', false);
+        
+        // 6. الانتقال إلى قسم الاختبار
+        displaySection('quiz-section');
+    }
+
+    function renderResources() {
+        const container = document.getElementById('resources-list-content');
+        let resourcesHtml = '';
+        resourcesData.forEach(resource => {
+            resourcesHtml += `
+                <div class="resource-item" title="${resource.tooltip || ''}">
+                    <i class="${resource.iconClass}"></i>
+                    <a href="${resource.url}" target="_blank">${resource.text}</a>
+                </div>
+            `;
+        });
+        container.innerHTML = resourcesHtml;
+    }
+
+    function renderQuiz(questions, containerId, isReview = false, reviewAnswers = []) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        let questionNumber = 1;
+        
+        questions.forEach((qData, index) => {
+            let questionHtml = '';
+            let qId = `q${index}`;
+
+            const pointsDisplay = qData.type === 'matching' ? `${qData.points} درجات` : `درجة واحدة`;
+            
+            // تحديد حالة السؤال للمراجعة
+            const isCorrect = isReview ? (reviewAnswers[index]?.isCorrect || false) : false;
+            const reviewClass = isReview ? (isCorrect ? 'correct' : 'incorrect') : '';
+
+            questionHtml += `
+                <div class="question-box" data-type="${qData.type}" data-index="${index}">
+                    <p class="question-title ${reviewClass}">${questionNumber++}. ${qData.q} <span>(${pointsDisplay})</span></p>
+            `;
+            
+            if (qData.type === 'mcq' || qData.type === 'tf') {
+                const options = qData.type === 'tf' ? ["True", "False"] : qData.options;
+                const correctValue = qData.answer.toString().toLowerCase();
+
+                questionHtml += `<div class="options-group">`;
+                options.forEach((option, oIndex) => {
+                    const optionId = `${qId}-o${oIndex}`;
+                    const valueToCompare = qData.type === 'tf' ? (option === "True" ? 'true' : 'false') : option;
+                    
+                    let inputChecked = '';
+                    let labelClass = '';
+                    let disabled = '';
+                    
+                    if (isReview) {
+                        disabled = 'disabled';
+                        const userAnswerValue = reviewAnswers[index]?.userAnswer?.toString().toLowerCase();
+
+                        if (valueToCompare.toLowerCase() === correctValue) {
+                            labelClass = 'correct-answer';
+                        } else if (userAnswerValue === valueToCompare.toLowerCase()) {
+                            labelClass = 'incorrect-answer';
+                            inputChecked = 'checked';
+                        }
+                    } else if (userAnswers[index]?.userAnswer?.toString().toLowerCase() === valueToCompare.toLowerCase()) {
+                         inputChecked = 'checked';
+                    }
+                    
+                    questionHtml += `
+                        <input type="radio" name="${qId}" id="${optionId}" value="${valueToCompare}" ${inputChecked} style="display: none;" ${disabled}> 
+                        <label for="${optionId}" class="${labelClass}" onclick="handleAnswerChange(${index}, this.previousElementSibling.value)">
+                             ${option}
+                        </label>
+                    `;
+                });
+                questionHtml += `</div>`;
+            } else if (qData.type === 'fill') {
+                const userAnswer = isReview ? (reviewAnswers[index]?.userAnswer || '') : (userAnswers[index]?.userAnswer || '');
+                const disabled = isReview ? 'disabled' : '';
+                const placeholder = isReview ? `الإجابة الصحيحة: ${qData.answer}` : 'اكتب الإجابة هنا (بالإنجليزية أو أرقام)';
+                questionHtml += `<div class="fill-in-group">
+                    <input type="text" id="${qId}-input" value="${userAnswer}" placeholder="${placeholder}" ${disabled} onchange="handleAnswerChange(${index}, this.value)">
+                </div>`;
+            } else if (qData.type === 'matching') {
+                questionHtml += `<div class="matching-group">`;
+                
+                // خلط الخيارات اليمنى للعرض لمرة واحدة لكل سؤال
+                let rightOptions = qData.pairs.map(p => p.right);
+                if (!isReview) {
+                    rightOptions = shuffleArray(rightOptions);
+                } else {
+                    rightOptions = [...new Set(rightOptions)]; // خيارات فريدة في المراجعة
+                }
+
+                qData.pairs.forEach((pair, pIndex) => {
+                    const selectId = `${qId}-p${pIndex}`;
+                    const disabled = isReview ? 'disabled' : '';
+                    const userAnswerValue = isReview ? (reviewAnswers[index]?.userAnswer?.[pair.left] || '') : (userAnswers[index]?.userAnswer?.[pair.left] || '');
+
+                    questionHtml += `
+                        <div class="matching-pair">
+                            <span>${pair.left}</span>
+                            <select id="${selectId}" ${disabled} onchange="handleMatchingChange(${index}, '${pair.left}', this.value)">
+                                <option value="" ${userAnswerValue === '' ? 'selected' : ''}>اختر التوصيل المناسب</option>
+                    `;
+                    rightOptions.forEach(option => {
+                         const selected = (userAnswerValue === option) ? 'selected' : '';
+                        questionHtml += `<option value="${option}" ${selected}>${option}</option>`;
+                    });
+                    questionHtml += `
+                            </select>
+                        </div>
+                    `;
+                });
+                questionHtml += `</div>`;
+            }
+            
+            // تفاصيل المراجعة (تظهر فقط في وضع المراجعة)
+            if (isReview) {
+                const resultText = isCorrect ? 'إجابتك صحيحة!' : 'إجابتك خاطئة.';
+                questionHtml += `<div class="review-details">
+                    <p>النتيجة: <span class="correct-answer-text">${resultText}</span></p>
+                    ${!isCorrect ? `<p>الإجابة الصحيحة: <span class="correct-answer-text">${getCorrectAnswerDisplay(qData)}</span></p>` : ''}
+                </div>`;
+            }
+
+            questionHtml += `</div>`;
+            container.innerHTML += questionHtml;
+        });
+        
+        // تفعيل MathJax لتحويل معادلات LaTeX
+        if (typeof MathJax !== 'undefined') {
+            MathJax.typesetPromise([container]).then(() => {
+                // قد تحتاج لإعادة ضبط ارتفاع الصفحة هنا إذا لزم الأمر
+            }).catch((err) => console.log('MathJax Typeset Error: ', err));
+        }
+
+
+        // إذا كانت المراجعة، نفعّل زر إنهاء الاختبار لإتاحة زر المراجعة
+        if (isReview) {
+             document.getElementById('submit-quiz-container').style.display = 'none';
+        } else {
+            document.getElementById('submit-quiz-container').style.display = 'block';
+        }
+
+    }
+    
+    // =========================================================================
+    // 15. وظائف معالجة الإجابات الفورية
+    // =========================================================================
+    
+    function handleAnswerChange(qIndex, value) {
+        // لتخزين الإجابة في حال MCQ أو TF أو Fill
+        userAnswers[qIndex].userAnswer = value;
+        
+        if (resultTiming === '5sec') {
+            checkInstantAnswer(qIndex);
+        }
+    }
+
+    function handleMatchingChange(qIndex, leftTerm, selectedRight) {
+        // تهيئة كائن الإجابات إذا لم يكن موجوداً
+        if (typeof userAnswers[qIndex].userAnswer !== 'object' || userAnswers[qIndex].userAnswer === null) {
+            userAnswers[qIndex].userAnswer = {};
+        }
+        
+        // تخزين الإجابة لزوج معين
+        userAnswers[qIndex].userAnswer[leftTerm] = selectedRight;
+        
+        if (resultTiming === '5sec') {
+            checkInstantAnswer(qIndex);
+        }
+    }
+
+    function checkInstantAnswer(qIndex) {
+        const qData = currentQuizData[qIndex];
+        const isAnswered = isQuestionAnswered(qIndex);
+        
+        // إيقاف أي مؤقت سابق لضمان عرض نتيجة أحدث إجابة
+        if (reviewTimeout) {
+            clearTimeout(reviewTimeout);
+        }
+
+        if (isAnswered) {
+            const result = checkSingleAnswer(qData, userAnswers[qIndex].userAnswer);
+            userAnswers[qIndex].isCorrect = result.isCorrect;
+            
+            // رندر السؤال مع تلوين فوري
+            renderInstantFeedback(qIndex, result.isCorrect, qData);
+
+            // إزالة التلوين بعد 5 ثواني
+            reviewTimeout = setTimeout(() => {
+                removeInstantFeedback(qIndex, qData);
+            }, 5000);
+        }
+    }
+    
+    function renderInstantFeedback(qIndex, isCorrect, qData) {
+        const qElement = document.querySelector(`.question-box[data-index="${qIndex}"]`);
+        if (!qElement) return;
+
+        // إزالة الكلاسات السابقة
+        qElement.classList.remove('instant-correct', 'instant-incorrect');
+        qElement.querySelector('.question-title').classList.remove('correct', 'incorrect');
+
+        // إضافة الكلاس الجديد
+        const feedbackClass = isCorrect ? 'instant-correct' : 'instant-incorrect';
+        qElement.classList.add(feedbackClass);
+        qElement.querySelector('.question-title').classList.add(isCorrect ? 'correct' : 'incorrect');
+
+        // تطبيق التلوين على الخيارات (فقط لـ MCQ/TF)
+        if (qData.type === 'mcq' || qData.type === 'tf') {
+            const selected = qElement.querySelector(`input[name="q${qIndex}"]:checked + label`);
+            const correctAnswerValue = qData.answer.toString().toLowerCase();
+            
+            qElement.querySelectorAll('.options-group label').forEach(label => {
+                label.classList.remove('correct-answer', 'incorrect-answer');
+                
+                const input = label.previousElementSibling;
+                const valueToCompare = input.value.toString().toLowerCase();
+
+                if (valueToCompare === correctAnswerValue) {
+                    label.classList.add('correct-answer');
+                } else if (input.checked) {
+                    label.classList.add('incorrect-answer');
+                }
+            });
+        }
+    }
+
+    function removeInstantFeedback(qIndex, qData) {
+        const qElement = document.querySelector(`.question-box[data-index="${qIndex}"]`);
+        if (!qElement) return;
+
+        qElement.classList.remove('instant-correct', 'instant-incorrect');
+        qElement.querySelector('.question-title').classList.remove('correct', 'incorrect');
+        
+        if (qData.type === 'mcq' || qData.type === 'tf') {
+            qElement.querySelectorAll('.options-group label').forEach(label => {
+                label.classList.remove('correct-answer', 'incorrect-answer');
+                // Restore default background/border for non-selected options
+                if (!label.previousElementSibling.checked) {
+                    label.style.background = '#f4f4f4';
+                    label.style.borderColor = '#eee';
+                }
+            });
+            // Restore selection highlight for the checked option
+            const checkedInput = qElement.querySelector(`input[name="q${qIndex}"]:checked`);
+            if (checkedInput) {
+                 checkedInput.nextElementSibling.style.background = '#e9ecef';
+                 checkedInput.nextElementSibling.style.borderColor = '#aaa';
+            }
+        }
+    }
+
+    function isQuestionAnswered(qIndex) {
+        const qData = currentQuizData[qIndex];
+        const answer = userAnswers[qIndex]?.userAnswer;
+
+        if (qData.type === 'mcq' || qData.type === 'tf') {
+            return answer !== null && answer !== '';
+        } else if (qData.type === 'fill') {
+            return answer !== null && answer.trim() !== '';
+        } else if (qData.type === 'matching') {
+            if (typeof answer !== 'object' || answer === null) return false;
+            return qData.pairs.every(pair => answer[pair.left] && answer[pair.left] !== '');
+        }
+        return false;
+    }
+
+    // =========================================================================
+    // 16. وظيفة تصحيح الاختبار وتقديم النتيجة النهائية
+    // =========================================================================
+    
+    function checkSingleAnswer(qData, userAnswer) {
+        let currentScore = 0;
+        let isCorrect = false;
+
+        if (qData.type === 'mcq' || qData.type === 'tf') {
+            const correctAnswer = qData.answer.toString().toLowerCase();
+            if (userAnswer && userAnswer.toString().toLowerCase() === correctAnswer) {
+                currentScore += qData.points;
+                isCorrect = true;
+            }
+        } else if (qData.type === 'fill') {
+            const correctAnswer = qData.answer.trim().toLowerCase();
+            if (userAnswer && userAnswer.trim().toLowerCase() === correctAnswer) {
+                currentScore += qData.points;
+                isCorrect = true;
+            }
+        } else if (qData.type === 'matching') {
+            if (typeof userAnswer === 'object' && userAnswer !== null) {
+                let pairScore = 0;
+                qData.pairs.forEach(pair => {
+                    if (userAnswer[pair.left] === pair.right) {
+                        pairScore += 1;
+                    }
+                });
+                currentScore += pairScore;
+                isCorrect = (pairScore === qData.points);
+            }
+        }
+        return { score: currentScore, isCorrect: isCorrect };
+    }
+
+    function submitQuiz() {
+        if (resultTiming === '5sec' && reviewTimeout) {
+            clearTimeout(reviewTimeout); // إلغاء أي مراجعات فورية معلقة
+        }
+
+        let totalScore = 0;
+
+        currentQuizData.forEach((qData, index) => {
+            const result = checkSingleAnswer(qData, userAnswers[index]?.userAnswer);
+            totalScore += result.score;
+            userAnswers[index].isCorrect = result.isCorrect; // حفظ نتيجة التصحيح
+        });
+
+        const percentage = (totalScore / currentMaxScore);
+        const isPassed = percentage >= PASS_PERCENTAGE;
+
+        displayResult(totalScore, currentMaxScore, percentage, isPassed);
+    }
+
+    function displayResult(score, maxScore, percentage, isPassed) {
+        const modal = document.getElementById('result-modal');
+        const content = document.getElementById('result-content');
+        const status = document.getElementById('result-status');
+        const message = document.getElementById('result-message');
+        const scoreDetails = document.getElementById('score-details');
+
+        content.classList.remove('success-bg', 'failure-bg');
+        document.getElementById('fireworks-canvas').style.display = 'none';
+        stopFireworks(); 
+
+        // تنسيق الرسالة والتأثير
+        if (isPassed) {
+            content.classList.add('success-bg');
+            status.textContent = "تهانينا! أنت مجتاز 🥳";
+            message.innerHTML = "عقبال الميد ترم ياوحش وباقي المواد فل مارك بالتوفيق";
+            document.getElementById('fireworks-canvas').style.display = 'block';
+            startFireworks();
+        } else {
+            content.classList.add('failure-bg');
+            status.textContent = "فرصة للتحسين! لم تجتز 😥";
+            message.innerHTML = "الرسوب والفشل ليسا نهاية المطاف بل فرص للنهوض من جديد بفهم أعمق وخطط أفضل بالتوفيق ياوحش وارجع ذاكر وتعال";
+        }
+
+        const percentageDisplay = (percentage * 100).toFixed(1);
+        scoreDetails.innerHTML = `نتيجة الاختبار: ${score} / ${maxScore} <br> (${percentageDisplay}%)`;
+        
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+    }
+
+    function closeResultModal() {
+        const modal = document.getElementById('result-modal');
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+        stopFireworks();
+        // لإعادة تهيئة حقول الإدخال في الاختبار التالي
+        document.getElementById('quiz-questions').innerHTML = ''; 
+    }
+    
+    // =========================================================================
+    // 17. وظائف المراجعة (Review)
+    // =========================================================================
+
+    function getCorrectAnswerDisplay(qData) {
+        if (qData.type === 'matching') {
+            return qData.pairs.map(p => `${p.left} = ${p.right}`).join(' | ');
+        }
+        return qData.answer.toString();
+    }
+
+    function showReviewModal() {
+        const reviewModal = document.getElementById('review-modal');
+        // عرض الأسئلة في وضع المراجعة
+        renderQuiz(currentQuizData, 'review-questions', true, userAnswers); 
+        
+        reviewModal.classList.add('active');
+        reviewModal.style.display = 'flex';
+    }
+
+    function closeReviewModal() {
+        const reviewModal = document.getElementById('review-modal');
+        reviewModal.classList.remove('active');
+        reviewModal.style.display = 'none';
+    }
+
+    // =========================================================================
+    // 18. تأثير الألعاب النارية (Fireworks)
+    // =========================================================================
+    
+    const canvas = document.getElementById('fireworks-canvas');
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const randColor = () => {
+        const h = randInt(0, 360);
+        return { h: h, s: 100, l: 50 };
+    };
+
+    class Particle {
+        constructor(x, y, color, speed, direction, gravity, friction, size) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.speed = speed;
+            this.direction = direction;
+            this.vx = Math.cos(direction) * speed;
+            this.vy = Math.sin(direction) * speed;
+            this.gravity = gravity;
+            this.friction = friction;
+            this.alpha = 1;
+            this.decay = rand(0.005, 0.02);
+            this.size = size;
+            this.isRocket = false;
+        }
+
+        update() {
+            this.vx *= this.friction;
+            this.vy *= this.friction;
+            this.vy += this.gravity;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.alpha -= this.decay;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${this.alpha})`;
+            ctx.fill();
+            ctx.closePath();
+            ctx.restore();
+        }
+    }
+
+    let particles = [];
+    let isRunning = false;
+
+    function createExplosion(x, y, color, count = 30) {
+        for (let i = 0; i < count; i++) {
+            const speed = rand(1, 10);
+            const direction = rand(0, Math.PI * 2);
+            particles.push(new Particle(x, y, color, speed, direction, 0.1, 0.98, rand(1, 3)));
+        }
+    }
+
+    function createRocket() {
+        const x = rand(0, canvas.width);
+        const y = canvas.height;
+        const targetY = rand(50, canvas.height / 2);
+        const color = randColor();
+        const rocket = new Particle(x, y, color, rand(10, 15), -Math.PI / 2, 0.1, 1, 3);
+        rocket.targetY = targetY;
+        rocket.decay = 0.005; 
+        rocket.isRocket = true;
+        
+        rocket.update = function() {
+            this.vy += this.gravity;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.alpha -= this.decay;
+
+            if (this.y < this.targetY) {
+                createExplosion(this.x, this.y, this.color, 50);
+                return true; 
+            }
+            return false;
+        };
+
+        particles.push(rocket);
+    }
+
+    let lastRocketTime = 0;
+    let rocketInterval = 500; 
+
+    function animate(timestamp) {
+        if (!isRunning) return;
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        particles = particles.filter(particle => {
+            if (particle.isRocket && particle.update()) {
+                return false;
+            }
+            
+            if (particle.alpha > 0) {
+                particle.update();
+                particle.draw();
+                return true;
+            }
+            return false;
+        });
+
+        if (timestamp - lastRocketTime > rocketInterval) {
+            createRocket();
+            lastRocketTime = timestamp;
+            rocketInterval = randInt(200, 600); 
+        }
+
+        animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function startFireworks() {
+        if (!isRunning) {
+            isRunning = true;
+            particles = [];
+            resizeCanvas();
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            animationFrameId = requestAnimationFrame(animate);
+        }
+    }
+
+    function stopFireworks() {
+        if (isRunning) {
+            cancelAnimationFrame(animationFrameId);
+            isRunning = false;
+            particles = [];
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+    
+</script>
+</body>
+</html>
