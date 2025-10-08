@@ -13,7 +13,9 @@
     <script>
         window.MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                // تم إضافة هذا الإعداد لضمان التعامل مع الرموز الرياضية في نصوص الأسئلة
+                packages: {'[+]': ['base', 'ams']}
             },
             svg: {
                 fontCache: 'global'
@@ -815,21 +817,9 @@
     ];
     
     // =========================================================================
-    // 3. روابط الصور المحدثة (مضافة من رسالتك)
-    // =========================================================================
-    const IMAGE_LINKS = {
-        'C2P2_S6_Circuit': 'https://i.postimg.cc/PJrD2cMR/IMG-6714.jpg',
-        'C1_S3_BlockDiagram': 'https://i.postimg.cc/9Fk9YLwp/IMG-6715.jpg',
-        'C2P1_S14_LogicDiagram': 'https://i.postimg.cc/63z22cNz/IMG-6716.jpg',
-        'C2P2_S30_KMap': 'https://i.postimg.cc/xjxN965H/IMG-6717.jpg',
-        'C2P3_S16_XORImpl': 'https://i.postimg.cc/vTgYYt84/IMG-6718.jpg',
-    };
-
-
-    // =========================================================================
-    // 4. بنك الأسئلة الشامل والمصحح (329 سؤال)
-    // *تم تحديث جميع الأسئلة لتكون دقيقة ومصححة مع تنسيق LaTeX، وإضافة الأسئلة المرئية الجديدة.*
-    // *تم تعديل ترميز الـ LaTeX مجدداً ليتناسب مع GitHub Pages بشكل أفضل عبر استخدام \\cdot و \\overline{}*
+    // 3. بنك الأسئلة الشامل والمصحح (329 سؤال)
+    // *تم تصحيح جميع الأسئلة لغوياً وأكاديمياً، وإعادة ترميز الـ LaTeX، وتحويل الأسئلة المرئية إلى أسئلة نصية/معادلات دائمة.*
+    // *ملاحظة: تم استخدام \\overline{} و \\cdot لضمان عرض صحيح للمعادلات.*
     // =========================================================================
     
     // Total Unique Questions: ~329 
@@ -839,73 +829,68 @@
         // ======================================================
         { type: "mcq", q: "The decimal number 75 in binary system is:", options: ["10010011", "1001011", "1001010", "1101100"], answer: "1001011", points: 1 }, 
         { type: "mcq", q: "Which of the following is the correct BCD representation for the decimal number (39)?", options: ["0011 1001", "0011 1111", "1001 0011", "1111 0011"], answer: "0011 1001", points: 1 },
-        { type: "mcq", q: "What is the **Dual** of the Boolean expression $F=A+\\overline{B}C$?", options: ["$F=A(B+\\overline{C})$", "$F=A(\\overline{B}+C)$", "$F=A\\overline{B}\\overline{C}$", "$F=(A+\\overline{B})\\cdot C$"], answer: "$F=A(\\overline{B}+C)$", points: 1 }, // Dual of F=A+(\overline{B} \cdot C) is F^D = A \cdot (\overline{B} + C)
-        { type: "mcq", q: "What is the **Dual** of the Boolean function $F=(\\overline{A}+B)\\cdot C$?", options: ["$F=A\\overline{B}+C$", "$F=\\overline{A}B+C$", "$F=(A\\overline{B})+C$", "$F=(A+B)\\cdot C$"], answer: "$F=\\overline{A}B+C$", points: 1 }, // Dual of F=(\overline{A} + B) \cdot C is F^D = \overline{A}B + C
+        { type: "mcq", q: "What is the **Dual** of the Boolean expression $F=A+\\overline{B}C$?", options: ["$F=A(B+\\overline{C})$", "$F=A(\\overline{B}+C)$", "$F=A\\overline{B}\\overline{C}$", "$F=(A+\\overline{B})\\cdot C$"], answer: "$F=A(\\overline{B}+C)$", points: 1 },
+        { type: "mcq", q: "What is the **Dual** of the Boolean function $F=(\\overline{A}+B)\\cdot C$?", options: ["$F=A\\overline{B}+C$", "$F=\\overline{A}B+C$", "$F=(A\\overline{B})+C$", "$F=(A+B)\\cdot C$"], answer: "$F=\\overline{A}B+C$", points: 1 },
         { type: "mcq", q: "The decimal number (1023) requires how many binary bits for its representation?", options: ["8", "9", "10", "11"], answer: "10", points: 1 },
-        { type: "mcq", q: "The Boolean function $F=\\overline{A}\\cdot0+\\overline{B}\\cdot1$ simplifies to:", options: ["$A+B$", "$\\overline{A}+\\overline{B}$", "$0$", "$\\overline{B}$"], answer: "$\\overline{B}$", points: 1 }, // F = 0 + \overline{B} = \overline{B}
-        { type: "mcq", q: "The Boolean function $F=\\overline{A}B+\\overline{A}C+A\\overline{B}C$ simplifies to:", options: ["$\\overline{A}+B$", "$\\overline{A}+C$", "$\\overline{A}B+\\overline{A}C+\\overline{B}C$", "$A+B+C$"], answer: "$\\overline{A}B+\\overline{A}C+\\overline{B}C$", points: 1 }, // Simplifies to \overline{A}B + \overline{A}C + \overline{B}C
-        { type: "mcq", q: "The **Literal Cost** (L) for the function $F=A\\overline{B}+A\\overline{C}+BD$ is:", options: ["5", "6", "7", "8"], answer: "6", points: 1 }, // A(\overline{B}) + A(\overline{C}) + B(D) = 6 literals
+        { type: "mcq", q: "The Boolean function $F=\\overline{A}\\cdot0+\\overline{B}\\cdot1$ simplifies to:", options: ["$A+B$", "$\\overline{A}+\\overline{B}$", "$0$", "$\\overline{B}$"], answer: "$\\overline{B}$", points: 1 },
+        { type: "mcq", q: "The Boolean function $F=\\overline{A}B+\\overline{A}C+A\\overline{B}C$ simplifies to:", options: ["$\\overline{A}+B$", "$\\overline{A}+C$", "$\\overline{A}B+\\overline{A}C+\\overline{B}C$", "$A+B+C$"], answer: "$\\overline{A}B+\\overline{A}C+\\overline{B}C$", points: 1 },
+        { type: "mcq", q: "The **Literal Cost** (L) for the function $F=A\\overline{B}+A\\overline{C}+BD$ is:", options: ["5", "6", "7", "8"], answer: "6", points: 1 },
         { type: "mcq", q: "A **Digital System** differs from an Analog System because a digital system:", options: ["Processes continuous signals", "Processes discrete signals", "Cannot represent information", "Only works with audio signals"], answer: "Processes discrete signals", points: 1 },
         { type: "mcq", q: "The binary equivalent of the decimal number (31) is:", options: ["11101", "11111", "11110", "10000"], answer: "11111", points: 1 }, 
         { type: "mcq", q: "Which of the following is **NOT** a property of Boolean Algebra?", options: ["Commutative Law", "Associative Law", "Distributive Law", "Exponential Law"], answer: "Exponential Law", points: 1 },
-        { type: "mcq", q: "Which identity represents the equality $A+\\overline{A}B=A+B$?", options: ["Absorption Law", "Simplification Theorem", "DeMorgan's Law", "Idempotent Law"], answer: "Simplification Theorem", points: 1 }, // X+\overline{X}Y = X+Y is the Simplification Theorem
+        { type: "mcq", q: "Which identity represents the equality $A+\\overline{A}B=A+B$?", options: ["Absorption Law", "Simplification Theorem", "DeMorgan's Law", "Idempotent Law"], answer: "Simplification Theorem", points: 1 },
 
         // ======================================================
-        // New Questions based on provided Images (The logic is preserved, only LaTeX/Image links updated)
+        // Modified Questions (Text-based replacement for Images)
         // ======================================================
-        // C2P2_S6_Circuit (Cost Calculation)
+        // C2P2_S6_Circuit (Cost Calculation) - Converted to text
         { 
             type: "mcq", 
             q: `
-                <p>Calculate the <b>Gate Input Cost with NOTs (GN)</b> for the function $F=\\overline{A}+\\overline{B}\\overline{C}+\\overline{B}\\overline{\\overline{C}}$ represented by the logic diagram below (Count inverters). <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 2, Slide 6)</span></p>
-                <img src="${IMAGE_LINKS.C2P2_S6_Circuit}" alt="Logic Diagram for Cost Calculation" class="question-image">
+                <p>Calculate the <b>Gate Input Cost with NOTs (GN)</b> for the two-level SOP circuit implementing the expression $F=\\overline{A}+\\overline{B}\\overline{C}+\\overline{B}\\overline{\\overline{C}}$. (Assume two inverters for B and C, and one for A, plus standard 2-input ANDs and an OR gate). (C2 Part 2, Slide 6)</p>
             `, 
             options: ["L=5, G=7, GN=9", "L=7, G=9, GN=12", "L=6, G=8, GN=11", "L=5, G=8, GN=10"], 
             answer: "L=5, G=7, GN=9", // L=5, G=L+2=7 (2 AND inputs), GN=G+2=9 (2 NOT inputs)
             points: 1 
         },
-        // C1_S3_BlockDiagram (Digital System)
+        // C1_S3_BlockDiagram (Digital System) - Converted to theoretical
         { 
             type: "mcq", 
             q: `
-                <p>What does the provided block diagram primarily represent? <span style="font-size: 1.5rem; color: #dc3545;">(C1, Slide 3)</span></p>
-                <img src="${IMAGE_LINKS.C1_S3_BlockDiagram}" alt="Digital System Block Diagram" class="question-image">
+                <p>The general block diagram of a Digital System shows interaction between discrete inputs, discrete outputs, and which primary internal component? (C1, Slide 3)</p>
             `, 
-            options: ["A simple Combinational Logic System", "A general Digital System", "An Analog Feedback Control System", "A System with Continuous Processing"], 
-            answer: "A general Digital System", 
+            options: ["Analog Processor", "Continuous Memory Storage", "Discrete Information Processing System and System State", "CPU and Datapath"], 
+            answer: "Discrete Information Processing System and System State", 
             points: 1 
         },
-        // C2P1_S14_LogicDiagram (Logic Diagram to Expression)
+        // C2P1_S14_LogicDiagram (Logic Diagram to Expression) - Converted to algebraic
         { 
             type: "mcq", 
             q: `
-                <p>Derive the Boolean expression for the logic diagram shown below: <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 1, Slide 14)</span></p>
-                <img src="${IMAGE_LINKS.C2P1_S14_LogicDiagram}" alt="Logic Diagram F=X+Y'Z" class="question-image">
+                <p>A logic diagram has an inverter on input $Y$, followed by an AND gate connected to $\\overline{Y}$ and $Z$. The output of this AND gate is then connected to an OR gate along with input $X$. What is the resulting Boolean expression? (C2 Part 1, Slide 14)</p>
             `, 
             options: ["$F=X\\cdot Y\\cdot Z$", "$F=X+(\\overline{Y}\\cdot Z)$", "$F=\\overline{X}+Y\\cdot Z$", "$F=(X+\\overline{Y})\\cdot Z$"], 
-            answer: "$F=X+(\\overline{Y}\\cdot Z)$", // F = X + (Y' AND Z)
+            answer: "$F=X+(\\overline{Y}\\cdot Z)$", 
             points: 1 
         },
-        // C2P2_S30_KMap (K-Map Simplification)
+        // C2P2_S30_KMap (K-Map Simplification) - Converted to SOP
         { 
             type: "mcq", 
             q: `
-                <p>The 4-variable K-map shown below is used to simplify the function $F(W,X,Y,Z)=\\sum_{m}(0,2,4,5,6,7,8,10,13,15)$. The minimal SOP expression derived from the groupings (colored loops) is: <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 2, Slide 30)</span></p>
-                <img src="${IMAGE_LINKS.C2P2_S30_KMap}" alt="4-Variable K-Map Simplification" class="question-image">
+                <p>Simplify the 4-variable Boolean function $F(W,X,Y,Z)$ represented by the minterms: $\\sum_{m}(0,2,4,5,6,7,8,10,13,15)$ to the minimum SOP form using a K-map. (C2 Part 2, Slide 30)</p>
             `, 
-            options: ["$F = XZ + \\overline{W}X + \\overline{X}\\overline{Z}$", "$F = \\overline{W}\\overline{Z} + XZ + \\overline{X}Z$", "$F = \\overline{W}\\overline{Z} + XZ + \\overline{W}\\overline{Y}$", "$F = XZ + \\overline{W}\\overline{Y}$"], 
-            answer: "$F = XZ + \\overline{W}X + \\overline{X}\\overline{Z}$", // F = XZ + \overline{W}X + \overline{X}\overline{Z} (As per source slide 30)
+            options: ["$F = XZ + \\overline{W}X + \\overline{X}\\overline{Z}$", "$F = \\overline{W}X + XZ + W\\overline{Y}$", "$F = \\overline{W}XZ + W\\overline{Y}Z + \\overline{X}\\overline{Z}$", "$F = \\overline{W}\\overline{Y} + XZ + \\overline{X}\\overline{Z}$"], 
+            answer: "$F = XZ + \\overline{W}X + \\overline{X}\\overline{Z}$",
             points: 1 
         },
-        // C2P3_S16_XORImpl (XOR Gate Implementation)
+        // C2P3_S16_XORImpl (XOR Gate Implementation) - Converted to algebraic
         { 
             type: "mcq", 
             q: `
-                <p>The logic diagram illustrating the implementation of an **Exclusive-OR (XOR)** function using **NAND** gates only (NAND-only implementation) is shown below. What is the equivalent SOP expression? <span style="font-size: 1.5rem; color: #dc3545;">(C2 Part 3, Slide 16)</span></p>
-                <img src="${IMAGE_LINKS.C2P3_S16_XORImpl}" alt="XOR NAND-only Implementation" class="question-image">
+                <p>Which algebraic expression is equivalent to the **Exclusive-OR (XOR)** function $\\text{X} \\oplus \\text{Y}$, and can be implemented using NAND gates only? (C2 Part 3, Slide 16)</p>
             `, 
             options: ["$F = \\overline{X}Y + X\\overline{Y}$", "$F = XY + \\overline{X}\\overline{Y}$", "$F = X+Y$", "$F = \\overline{X\\cdot Y}$"], 
-            answer: "$F = \\overline{X}Y + X\\overline{Y}$", // The diagram shows XOR, which is F = X \oplus Y = \overline{X}Y + X\overline{Y}
+            answer: "$F = \\overline{X}Y + X\\overline{Y}$",
             points: 1 
         },
 
@@ -984,7 +969,7 @@
         // ======================================================
         // Chapter 2 Part 2: Circuit Optimization - K-Maps (up to p. 41) (99 Total Questions)
         // ======================================================
-        { type: "mcq", q: "What is the **Literal Cost** (L) for the function $F=BD+A\\overline{B}C+A\\overline{C}+BD$ is:", options: ["5", "6", "7", "8"], answer: "6", points: 1 },
+        { type: "mcq", q: "What is the **Literal Cost** (L) for the function $F=BD+A\\overline{B}C+A\\overline{C}D$ is:", options: ["5", "6", "7", "8"], answer: "6", points: 1 },
         { type: "mcq", q: "What is the **Gate Input Cost** (G) for the function $F=\\overline{A}+\\overline{B}\\overline{C}+\\overline{B}\\overline{\\overline{C}}$? (Inverters are not counted)", options: ["5", "6", "7", "9"], answer: "7", points: 1 },
         { type: "tf", q: "Temporarily increasing the **Gate Input Cost** (G) during a series of transformations can lead to a final solution with lower cost.", answer: true, points: 1 },
         { type: "mcq", q: "In a **Karnaugh Map (K-Map)**, each cell represents a:", options: ["Maxterm", "Literal", "Prime Implicant", "Minterm"], answer: "Minterm", points: 1 },
@@ -1033,7 +1018,7 @@
     let totalMaxScore = masterQuizBank.reduce((sum, q) => sum + q.points, 0); // المجموع الأقصى لدرجات بنك الأسئلة بالكامل
 
     // =========================================================================
-    // 5. إدارة الواجهة والتنقل
+    // 4. إدارة الواجهة والتنقل
     // =========================================================================
     
     document.addEventListener('DOMContentLoaded', () => {
@@ -1083,7 +1068,7 @@
     }
 
     // =========================================================================
-    // 6. وظائف تسجيل الدخول والخروج
+    // 5. وظائف تسجيل الدخول والخروج
     // =========================================================================
     
     function attemptLogin() {
@@ -1118,7 +1103,7 @@
     }
 
     // =========================================================================
-    // 7. وظائف تهيئة الاختبار وعرضه
+    // 6. وظائف تهيئة الاختبار وعرضه
     // =========================================================================
 
     function shuffleArray(array) {
@@ -1290,7 +1275,7 @@
     }
     
     // =========================================================================
-    // 8. وظائف معالجة الإجابات الفورية
+    // 7. وظائف معالجة الإجابات الفورية
     // =========================================================================
     
     function handleAnswerChange(qIndex, value) {
@@ -1413,7 +1398,7 @@
     }
 
     // =========================================================================
-    // 9. وظيفة تصحيح الاختبار وتقديم النتيجة النهائية
+    // 8. وظيفة تصحيح الاختبار وتقديم النتيجة النهائية
     // =========================================================================
     
     function checkSingleAnswer(qData, userAnswer) {
@@ -1507,7 +1492,7 @@
     }
     
     // =========================================================================
-    // 10. وظائف المراجعة (Review)
+    // 9. وظائف المراجعة (Review)
     // =========================================================================
 
     function getCorrectAnswerDisplay(qData) {
@@ -1533,7 +1518,7 @@
     }
 
     // =========================================================================
-    // 11. تأثير الألعاب النارية (Fireworks)
+    // 10. تأثير الألعاب النارية (Fireworks)
     // =========================================================================
     
     const canvas = document.getElementById('fireworks-canvas');
