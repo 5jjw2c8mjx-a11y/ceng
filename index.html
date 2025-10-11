@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Logic - منصة تدريب</title>
+    <title>منصة عز التدريبية - Digital Logic</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <script type="text/javascript" id="MathJax-script" async
@@ -148,63 +148,7 @@
             display: none; 
         }
 
-        /* Login Section Styles */
-        .login-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* استخدام رابط الصورة المباشر للخلفية */
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(40, 167, 69, 0.7)), url('https://i.postimg.cc/jSd9jZRV/IMG-6679.jpg'); 
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 4rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 45rem;
-            text-align: center;
-        }
-        
-        .login-container h2 {
-            font-size: 3rem;
-            color: var(--black);
-            margin-bottom: 3rem;
-        }
-        
-        .login-container p {
-            font-size: 1.6rem;
-            color: var(--light-color);
-            margin-top: 1rem;
-            line-height: 1.5;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: .1rem solid #ccc;
-            border-radius: .8rem;
-            font-size: 1.7rem;
-            background: #f4f4f4;
-        }
-        
-        .login-container .btn {
-            width: 100%;
-            padding: 1.5rem 3rem;
-            font-size: 2rem;
-        }
-        
-        #login-message {
-            color: var(--danger-color);
-            font-size: 1.6rem;
-            margin-top: 1.5rem;
-            display: none;
-        }
+        /* Login Section Styles - تم حذف هذا الجزء */
         
         /* Intro & Home Content Styles */
         .home-section {
@@ -651,36 +595,20 @@
 
     <canvas id="fireworks-canvas"></canvas>
 
-    <header class="header" id="main-header" style="display: none;">
+    <header class="header" id="main-header" style="display: block;">
         <div class="container">
-            <a href="#" class="logo">
-                <span>CENG</span> 121
+            <a href="https://ezqz.oneapp.dev" target="_blank" class="logo">
+                منصة عز <span>التدريبية</span>
             </a>
             <nav class="navbar">
                 <a href="#" class="nav-link active" data-target="intro-section">الرئيسية/تعريف</a>
                 <a href="#" class="nav-link" data-target="quiz-section">الاختبار</a>
-                <a href="#" class="nav-link" onclick="logout()">تسجيل الخروج</a>
             </nav>
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
 
-    <section class="login-section" id="login-section">
-        <div class="login-container">
-            <h2>منصة تدريب Digital Logic</h2>
-            <input type="text" id="login-username" placeholder="اسم المستخدم" value="">
-            <input type="password" id="login-password" placeholder="كلمة المرور" value="">
-            <button class="btn" onclick="attemptLogin()">تسجيل الدخول</button>
-            <p id="login-message">اسم المستخدم أو كلمة المرور غير صحيحة.</p>
-            <p>
-                تواصل واتساب على <span style="font-weight: bold; color: var(--main-color);">0500772878</span> 
-                أو عبر <a href="http://wa.me/966500772878" target="_blank" style="color: var(--secondary-color); font-weight: bold;">هذا الرابط</a> 
-                لطلب اسم المستخدم وكلمة السر.
-            </p>
-        </div>
-    </section>
-
-    <main id="main-content" style="display: none;">
+    <main id="main-content" style="display: block;">
         
         <section class="home-section" id="intro-section">
             <div class="intro-content">
@@ -735,9 +663,6 @@
                 </div>
                 
                 <div class="footer-note">
-                    <p style="text-align: center; font-size: 1.8rem; margin-top: 3rem;">
-                        <span style="color: var(--secondary-color); font-weight: 700;">أخوكم المهندس ومبرمج الموقع، عبدالعزيز محمد العنزي.</span>
-                    </p>
                     <p style="text-align: center; font-size: 1.5rem; color: var(--light-color);">
                         "لا تنسونا من دعواتكم"
                     </p>
@@ -759,9 +684,10 @@
         
     </main>
 
-    <footer class="footer" id="main-footer" style="display: none;">
+    <footer class="footer" id="main-footer" style="display: block;">
         <div class="container">
-            <p>© 2024 CENG 121 Exam Prep. جميع الحقوق محفوظة للمهندس **عبدالعزيز محمد العنزي**.</p>
+            <p>© 2024 CENG 121 Exam Prep. جميع الحقوق محفوظة لـ **منصة عز التدريبية**.</p>
+            <p>لزيارة المنصة: <a href="https://ezqz.oneapp.dev" target="_blank" style="color: var(--secondary-color); font-weight: bold;">https://ezqz.oneapp.dev</a></p>
         </div>
     </footer>
     
@@ -794,9 +720,8 @@
 <script>
     // =========================================================================
     // 1. بيانات الإدارة والثوابت
+    // *تم حذف متغيرات الدخول (ADMIN_USERNAME, ADMIN_PASSWORD) لتمكين الدخول المباشر*
     // =========================================================================
-    const ADMIN_USERNAME = "ceng"; // تم التعديل
-    const ADMIN_PASSWORD = "121";   // تم التعديل
     const PASS_PERCENTAGE = 0.60; // 60%
     const QUIZ_LENGTH = 40; // عدد الأسئلة في كل اختبار
 
@@ -1043,6 +968,9 @@
 
         // رندر الموارد عند التحميل
         renderResources();
+        
+        // عرض الصفحة الترحيبية عند الدخول المباشر (بعد حذف صفحة اللوجن)
+        displaySection('intro-section');
     });
 
     function displaySection(targetId) {
@@ -1069,39 +997,9 @@
 
     // =========================================================================
     // 5. وظائف تسجيل الدخول والخروج
+    // *تم حذف وظيفتي attemptLogin و logout لتمكين الدخول المباشر*
     // =========================================================================
     
-    function attemptLogin() {
-        const username = document.getElementById('login-username').value;
-        const password = document.getElementById('login-password').value;
-        const loginMessage = document.getElementById('login-message');
-        
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('main-header').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
-            
-            // عرض الصفحة الترحيبية عند الدخول
-            displaySection('intro-section');
-            
-        } else {
-            loginMessage.style.display = 'block';
-        }
-    }
-    
-    function logout() {
-        if (confirm("هل أنت متأكد من تسجيل الخروج؟")) {
-            document.getElementById('login-section').style.display = 'flex';
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('main-header').style.display = 'none';
-            document.getElementById('main-footer').style.display = 'none';
-            document.getElementById('login-message').style.display = 'none';
-            document.getElementById('login-password').value = '';
-            document.getElementById('login-username').value = '';
-        }
-    }
-
     // =========================================================================
     // 6. وظائف تهيئة الاختبار وعرضه
     // =========================================================================
